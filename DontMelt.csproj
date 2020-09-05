@@ -161,6 +161,7 @@
     <Folder Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include=".gitignore" />
     <Content Include="Dont Melt Core\Assets\Embedded Items\BounceBox\BounceBox.png" />
     <Content Include="Dont Melt Core\Assets\Embedded Items\Checkpoint\CheckPoint.png" />
     <Content Include="Dont Melt Core\Assets\Embedded Items\Checkpoint\checkpointunlocked.png" />
