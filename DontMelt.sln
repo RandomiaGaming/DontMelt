@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30330.147
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DontMelt", "DontMelt.csproj", "{D6CB0432-3275-4786-A814-8AF4E068C636}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D6CB0432-3275-4786-A814-8AF4E068C636}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{D6CB0432-3275-4786-A814-8AF4E068C636}.Debug|x86.ActiveCfg = Debug|x86
+		{D6CB0432-3275-4786-A814-8AF4E068C636}.Debug|x86.Build.0 = Debug|x86
+		{D6CB0432-3275-4786-A814-8AF4E068C636}.Release|Any CPU.ActiveCfg = Release|x86
+		{D6CB0432-3275-4786-A814-8AF4E068C636}.Release|x86.ActiveCfg = Release|x86
+		{D6CB0432-3275-4786-A814-8AF4E068C636}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0454AAD0-B3CD-40A2-AF7D-875937C664B1}
+	EndGlobalSection
+EndGlobal

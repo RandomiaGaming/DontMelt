@@ -1,0 +1,25 @@
+D:\Don't Melt\obj\x86\Debug\DontMelt.csprojAssemblyReference.cache
+D:\Don't Melt\obj\x86\Debug\DontMelt.csproj.CoreCompileInputs.cache
+D:\Don't Melt\bin\Windows\x86\Debug\DontMelt.exe
+D:\Don't Melt\bin\Windows\x86\Debug\DontMelt.pdb
+D:\Don't Melt\bin\Windows\x86\Debug\MonoGame.Framework.dll
+D:\Don't Melt\bin\Windows\x86\Debug\SharpDX.MediaFoundation.dll
+D:\Don't Melt\bin\Windows\x86\Debug\SharpDX.dll
+D:\Don't Melt\bin\Windows\x86\Debug\SharpDX.XAudio2.dll
+D:\Don't Melt\bin\Windows\x86\Debug\SharpDX.DXGI.dll
+D:\Don't Melt\bin\Windows\x86\Debug\SharpDX.Direct3D11.dll
+D:\Don't Melt\bin\Windows\x86\Debug\SharpDX.Direct2D1.dll
+D:\Don't Melt\bin\Windows\x86\Debug\SharpDX.XInput.dll
+D:\Don't Melt\bin\Windows\x86\Debug\MonoGame.Framework.xml
+D:\Don't Melt\bin\Windows\x86\Debug\SharpDX.MediaFoundation.xml
+D:\Don't Melt\bin\Windows\x86\Debug\SharpDX.xml
+D:\Don't Melt\bin\Windows\x86\Debug\SharpDX.XAudio2.xml
+D:\Don't Melt\bin\Windows\x86\Debug\SharpDX.DXGI.xml
+D:\Don't Melt\bin\Windows\x86\Debug\SharpDX.Direct3D11.xml
+D:\Don't Melt\bin\Windows\x86\Debug\SharpDX.Direct2D1.xml
+D:\Don't Melt\bin\Windows\x86\Debug\SharpDX.XInput.xml
+D:\Don't Melt\obj\x86\Debug\DontMelt.csproj.CopyComplete
+D:\Don't Melt\obj\x86\Debug\DontMelt.exe
+D:\Don't Melt\obj\x86\Debug\DontMelt.pdb
+D:\Don't Melt\Don't Melt - Mono Game\obj\x86\Debug\DontMelt.csprojAssemblyReference.cache
+D:\Don't Melt\Don't Melt - Mono Game\obj\x86\Debug\DontMelt.csproj.CoreCompileInputs.cache
