@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DontMelt.Helpers
+namespace DontMelt
 {
     public static class MathHelper
     {

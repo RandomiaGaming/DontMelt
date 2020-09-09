@@ -1,31 +1,29 @@
-using DontMelt.Helpers;
-namespace DontMelt.Data
+namespace DontMelt
 {
     public sealed class Rectangle
     {
-        private Vector Min = Vector.Create(0, 0);
-        private Vector Max = Vector.Create(1, 1);
-
+        private Point Min = Point.Create(0, 0);
+        private Point Max = Point.Create(1, 1);
         private Rectangle() { }
         public static Rectangle Create()
         {
             Rectangle Output = new Rectangle();
-            Output.Min = Vector.Create(0, 0);
-            Output.Max = Vector.Create(0, 0);
+            Output.Min = Point.Create(0, 0);
+            Output.Max = Point.Create(0, 0);
             return Output;
         }
-        public static Rectangle Create(Vector Size)
+        public static Rectangle Create(Point Size)
         {
             Rectangle Output = new Rectangle();
-            Output.Min = Vector.Create(0, 0);
-            Output.Max = Vector.Create(MathHelper.Abs(Size.x), MathHelper.Abs(Size.y));
+            Output.Min = Point.Create(0, 0);
+            Output.Max = Point.Create(MathHelper.Abs(Size.x), MathHelper.Abs(Size.y));
             return Output;
         }
-        public static Rectangle Create(Vector Min, Vector Max)
+        public static Rectangle Create(Point Min, Point Max)
         {
             Rectangle Output = new Rectangle();
-            Output.Min = Vector.Create(MathHelper.Min(Min.x, Max.x), MathHelper.Min(Min.y, Max.y));
-            Output.Max = Vector.Create(MathHelper.Max(Min.x, Max.x), MathHelper.Max(Min.y, Max.y));
+            Output.Min = Point.Create(MathHelper.Min(Min.x, Max.x), MathHelper.Min(Min.y, Max.y));
+            Output.Max = Point.Create(MathHelper.Max(Min.x, Max.x), MathHelper.Max(Min.y, Max.y));
             return Output;
         }
         public override string ToString()
@@ -64,26 +62,15 @@ namespace DontMelt.Data
             return !(A == B);
         }
 
-        public Vector Get_Min()
+        public Point Get_Min()
         {
             return Min.Clone();
         }
-        public Vector Get_Max()
+        public Point Get_Max()
         {
             return Max.Clone();
         }
-        public bool Incapsulates(Vector A)
-        {
-            if (A.x >= Min.x && A.x <= Max.x && A.y >= Min.y && A.y <= Max.y)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-        public void Incapsulate(Vector A)
+        public void Incapsulate(Point A)
         {
             if (A.x < Min.x)
             {
@@ -102,7 +89,50 @@ namespace DontMelt.Data
                 Max.y = A.y;
             }
         }
-
+        public bool Incapsulates(Point A)
+        {
+            if (A.x >= Min.x && A.x <= Max.x && A.y >= Min.y && A.y <= Max.y)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        public static bool Incapsulates(Rectangle A, Point B)
+        {
+            if (B.x >= A.Min.x && B.x <= A.Max.x && B.y >= A.Min.y && B.y <= A.Max.y)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        public bool Overlaps(Rectangle A)
+        {
+            if (Max.x < A.Min.x || Min.x > A.Max.x || Max.y < A.Min.y || Min.y > A.Max.y)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+        public static bool Overlaps(Rectangle A, Rectangle B)
+        {
+            if (A.Max.x < B.Min.x || A.Min.x > B.Max.x || A.Max.y < B.Min.y || A.Min.y > B.Max.y)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
         public Rectangle Clone()
         {
             return Create(Min.Clone(), Max.Clone());

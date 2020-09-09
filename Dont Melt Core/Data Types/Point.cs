@@ -1,23 +1,21 @@
-using DontMelt.Helpers;
-
-namespace DontMelt.Data
+namespace DontMelt
 {
-    public sealed class Vector
+    public sealed class Point
     {
         public int x = 0;
         public int y = 0;
 
-        private Vector() { }
-        public static Vector Create()
+        private Point() { }
+        public static Point Create()
         {
-            Vector Output = new Vector();
+            Point Output = new Point();
             Output.x = 0;
             Output.y = 0;
             return Output;
         }
-        public static Vector Create(int x, int y)
+        public static Point Create(int x, int y)
         {
-            Vector Output = new Vector();
+            Point Output = new Point();
             Output.x = x;
             Output.y = y;
             return Output;
@@ -28,9 +26,9 @@ namespace DontMelt.Data
         }
         public override bool Equals(object obj)
         {
-            if (obj.GetType() == typeof(Vector))
+            if (obj.GetType() == typeof(Point))
             {
-                return this == (Vector)obj;
+                return this == (Point)obj;
             }
             else
             {
@@ -42,38 +40,38 @@ namespace DontMelt.Data
             return base.GetHashCode();
         }
 
-        public static bool operator ==(Vector A, Vector B)
+        public static bool operator ==(Point A, Point B)
         {
             return (A.x == B.x) && (A.y == B.y);
         }
-        public static bool operator !=(Vector A, Vector B)
+        public static bool operator !=(Point A, Point B)
         {
             return !(A == B);
         }
 
-        public static Vector operator +(Vector A, Vector B)
+        public static Point operator +(Point A, Point B)
         {
             return Create(A.x + B.x, A.y + B.y);
         }
-        public static Vector operator -(Vector A, Vector B)
+        public static Point operator -(Point A, Point B)
         {
             return Create(A.x - B.x, A.y - B.y);
         }
 
-        public static Vector operator *(Vector A, Vector B)
+        public static Point operator *(Point A, Point B)
         {
             return Create(A.x * B.x, A.y * B.y);
         }
-        public static Vector operator /(Vector A, Vector B)
+        public static Point operator /(Point A, Point B)
         {
             return Create(A.x / B.x, A.y / B.y);
         }
 
-        public static Vector operator +(Vector A)
+        public static Point operator +(Point A)
         {
             return A;
         }
-        public static Vector operator -(Vector A)
+        public static Point operator -(Point A)
         {
             return Create(A.x * -1, A.y * -1);
         }
@@ -82,12 +80,12 @@ namespace DontMelt.Data
         {
             return MathHelper.Sqrt((x * x) + (y * y));
         }
-        public static double Magnitude(Vector A)
+        public static double Magnitude(Point A)
         {
             return MathHelper.Sqrt((A.x * A.x) + (A.y * A.y));
         }
 
-        public Vector Clone()
+        public Point Clone()
         {
             return Create(x, y);
         }
