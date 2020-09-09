@@ -1,9 +1,11 @@
+using System;
+
 namespace DontMelt
 {
     public sealed class Rectangle
     {
-        private Point Min = Point.Create(0, 0);
-        private Point Max = Point.Create(1, 1);
+        public Point Min = Point.Create(0, 0);
+        public Point Max = Point.Create(1, 1);
         private Rectangle() { }
         public static Rectangle Create()
         {
@@ -14,9 +16,17 @@ namespace DontMelt
         }
         public static Rectangle Create(Point Size)
         {
+            if (Size.x < 0)
+            {
+                throw new ArgumentOutOfRangeException("x");
+            }
+            if (Size.y < 0)
+            {
+                throw new ArgumentOutOfRangeException("y");
+            }
             Rectangle Output = new Rectangle();
             Output.Min = Point.Create(0, 0);
-            Output.Max = Point.Create(MathHelper.Abs(Size.x), MathHelper.Abs(Size.y));
+            Output.Max = Point.Create(Size.x, Size.y);
             return Output;
         }
         public static Rectangle Create(Point Min, Point Max)

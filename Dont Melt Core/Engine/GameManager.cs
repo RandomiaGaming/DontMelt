@@ -4,6 +4,6 @@
     {
         public GameManager() { }
         public virtual void Initialize() { }
-        public virtual void Update(double DeltaTime) { }
+        public virtual void Update(InputPacket Packet) { }
     }
 }

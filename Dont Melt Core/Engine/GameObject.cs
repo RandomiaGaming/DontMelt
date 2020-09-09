@@ -59,14 +59,14 @@ namespace DontMelt
         {
             foreach (Component C in Components)
             {
-                C.Initialize(this);
+                C.Initialize();
             }
         }
-        public void Update(double Delta_Time)
+        internal void Update(InputPacket Packet)
         {
             foreach (Component C in Components)
             {
-                C.Update(this, Delta_Time);
+                C.Update(Packet.Clone());
             }
         }
         private GameObject() { }

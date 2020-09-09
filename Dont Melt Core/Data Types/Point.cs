@@ -1,10 +1,11 @@
+using System.Runtime.Remoting.Messaging;
+
 namespace DontMelt
 {
     public sealed class Point
     {
         public int x = 0;
         public int y = 0;
-
         private Point() { }
         public static Point Create()
         {
@@ -87,7 +88,10 @@ namespace DontMelt
 
         public Point Clone()
         {
-            return Create(x, y);
+            Point Output = new Point();
+            Output.x = x;
+            Output.y = y;
+            return Output;
         }
     }
 }

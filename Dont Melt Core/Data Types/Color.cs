@@ -4,10 +4,15 @@ namespace DontMelt
 {
     public sealed class Color
     {
-        public int r = 0;
-        public int g = 0;
-        public int b = 0;
-        public int a = 255;
+        private int _r = 0;
+        private int _g = 0;
+        private int _b = 0;
+        private int _a = 255;
+
+        public int r { get { return _r; } set { if (value >= 0 && value <= 255) { _r = value; } else { throw new ArgumentOutOfRangeException("r"); } } }
+        public int g { get { return _g; } set { if (value >= 0 && value <= 255) { _g = value; } else { throw new ArgumentOutOfRangeException("g"); } } }
+        public int b { get { return _b; } set { if (value >= 0 && value <= 255) { _b = value; } else { throw new ArgumentOutOfRangeException("b"); } } }
+        public int a { get { return _a; } set { if (value >= 0 && value <= 255) { _a = value; } else { throw new ArgumentOutOfRangeException("a"); } } }
 
         private Color() { }
         public static Color Create()
@@ -33,6 +38,10 @@ namespace DontMelt
             if (b < 0 || b > 255)
             {
                 throw new ArgumentOutOfRangeException("b");
+            }
+            if (a < 0 || a > 255)
+            {
+                throw new ArgumentOutOfRangeException("a");
             }
             Color Output = new Color();
             Output.r = r;
@@ -85,18 +94,19 @@ namespace DontMelt
             return !(A == B);
         }
 
-        public static Color EqualMix(Color A, Color B)
-        {
-            return Create((A.r + B.r) / 2, (A.g + B.g) / 2, (A.b + B.b) / 2);
-        }
-        public static Color NormalMix(Color A, Color B)
+        public static Color Mix(Color A, Color B)
         {
             return Create((A.r + B.r) / 2, (A.g + B.g) / 2, (A.b + B.b) / 2);
         }
 
         public Color Clone()
         {
-            return Create(r, g, b);
+            Color Output = new Color();
+            Output.r = r;
+            Output.g = g;
+            Output.b = b;
+            Output.a = a;
+            return Output;
         }
     }
 }
