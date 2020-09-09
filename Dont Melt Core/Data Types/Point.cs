@@ -1,5 +1,3 @@
-using System.Runtime.Remoting.Messaging;
-
 namespace DontMelt
 {
     public sealed class Point
@@ -75,15 +73,6 @@ namespace DontMelt
         public static Point operator -(Point A)
         {
             return Create(A.x * -1, A.y * -1);
-        }
-
-        public double Magnitude()
-        {
-            return MathHelper.Sqrt((x * x) + (y * y));
-        }
-        public static double Magnitude(Point A)
-        {
-            return MathHelper.Sqrt((A.x * A.x) + (A.y * A.y));
         }
 
         public Point Clone()

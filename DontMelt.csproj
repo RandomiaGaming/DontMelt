@@ -61,11 +61,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
-    <Compile Include="Dont Melt Core\Data Types\OutputPacket.cs" />
     <Compile Include="Dont Melt Core\Data Types\InputPacket.cs" />
+    <Compile Include="Dont Melt Core\Data Types\OutputPacket.cs" />
+    <Compile Include="Dont Melt Core\Data Types\UpdatePacket.cs" />
     <Compile Include="Dont Melt Core\Engine\Component.cs" />
     <Compile Include="Dont Melt Core\Engine\DontMeltKernal.cs" />
-    <Compile Include="Dont Melt Core\Engine\GameManager.cs" />
     <Compile Include="Dont Melt Core\Engine\GameObject.cs" />
     <Compile Include="Dont Melt Core\Helpers\MathHelper.cs" />
     <Compile Include="InterfaceGame.cs" />

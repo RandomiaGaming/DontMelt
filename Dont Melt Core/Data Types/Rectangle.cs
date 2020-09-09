@@ -4,14 +4,14 @@ namespace DontMelt
 {
     public sealed class Rectangle
     {
-        public Point Min = Point.Create(0, 0);
-        public Point Max = Point.Create(1, 1);
+        public Point min = Point.Create(0, 0);
+        public Point max = Point.Create(1, 1);
         private Rectangle() { }
         public static Rectangle Create()
         {
             Rectangle Output = new Rectangle();
-            Output.Min = Point.Create(0, 0);
-            Output.Max = Point.Create(0, 0);
+            Output.min = Point.Create(0, 0);
+            Output.max = Point.Create(0, 0);
             return Output;
         }
         public static Rectangle Create(Point Size)
@@ -25,20 +25,20 @@ namespace DontMelt
                 throw new ArgumentOutOfRangeException("y");
             }
             Rectangle Output = new Rectangle();
-            Output.Min = Point.Create(0, 0);
-            Output.Max = Point.Create(Size.x, Size.y);
+            Output.min = Point.Create(0, 0);
+            Output.max = Point.Create(Size.x, Size.y);
             return Output;
         }
         public static Rectangle Create(Point Min, Point Max)
         {
             Rectangle Output = new Rectangle();
-            Output.Min = Point.Create(MathHelper.Min(Min.x, Max.x), MathHelper.Min(Min.y, Max.y));
-            Output.Max = Point.Create(MathHelper.Max(Min.x, Max.x), MathHelper.Max(Min.y, Max.y));
+            Output.min = Point.Create(MathHelper.Min(Min.x, Max.x), MathHelper.Min(Min.y, Max.y));
+            Output.max = Point.Create(MathHelper.Max(Min.x, Max.x), MathHelper.Max(Min.y, Max.y));
             return Output;
         }
         public override string ToString()
         {
-            return $"[{Min},{Max}]";
+            return $"[{min},{max}]";
         }
         public override bool Equals(object obj)
         {
@@ -74,34 +74,34 @@ namespace DontMelt
 
         public Point Get_Min()
         {
-            return Min.Clone();
+            return min.Clone();
         }
         public Point Get_Max()
         {
-            return Max.Clone();
+            return max.Clone();
         }
         public void Incapsulate(Point A)
         {
-            if (A.x < Min.x)
+            if (A.x < min.x)
             {
-                Min.x = A.x;
+                min.x = A.x;
             }
-            else if (A.x > Max.x)
+            else if (A.x > max.x)
             {
-                Max.x = A.x;
+                max.x = A.x;
             }
-            if (A.y < Min.y)
+            if (A.y < min.y)
             {
-                Min.y = A.y;
+                min.y = A.y;
             }
-            else if (A.y > Max.y)
+            else if (A.y > max.y)
             {
-                Max.y = A.y;
+                max.y = A.y;
             }
         }
         public bool Incapsulates(Point A)
         {
-            if (A.x >= Min.x && A.x <= Max.x && A.y >= Min.y && A.y <= Max.y)
+            if (A.x >= min.x && A.x <= max.x && A.y >= min.y && A.y <= max.y)
             {
                 return true;
             }
@@ -112,7 +112,7 @@ namespace DontMelt
         }
         public static bool Incapsulates(Rectangle A, Point B)
         {
-            if (B.x >= A.Min.x && B.x <= A.Max.x && B.y >= A.Min.y && B.y <= A.Max.y)
+            if (B.x >= A.min.x && B.x <= A.max.x && B.y >= A.min.y && B.y <= A.max.y)
             {
                 return true;
             }
@@ -123,7 +123,7 @@ namespace DontMelt
         }
         public bool Overlaps(Rectangle A)
         {
-            if (Max.x < A.Min.x || Min.x > A.Max.x || Max.y < A.Min.y || Min.y > A.Max.y)
+            if (max.x < A.min.x || min.x > A.max.x || max.y < A.min.y || min.y > A.max.y)
             {
                 return false;
             }
@@ -134,7 +134,7 @@ namespace DontMelt
         }
         public static bool Overlaps(Rectangle A, Rectangle B)
         {
-            if (A.Max.x < B.Min.x || A.Min.x > B.Max.x || A.Max.y < B.Min.y || A.Min.y > B.Max.y)
+            if (A.max.x < B.min.x || A.min.x > B.max.x || A.max.y < B.min.y || A.min.y > B.max.y)
             {
                 return false;
             }
@@ -145,7 +145,7 @@ namespace DontMelt
         }
         public Rectangle Clone()
         {
-            return Create(Min.Clone(), Max.Clone());
+            return Create(min.Clone(), max.Clone());
         }
     }
 }
