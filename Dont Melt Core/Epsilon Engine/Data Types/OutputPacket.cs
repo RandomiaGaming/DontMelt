@@ -1,4 +1,4 @@
-﻿namespace DontMelt
+﻿namespace EpsilonEngine
 {
     public sealed class OutputPacket
     {

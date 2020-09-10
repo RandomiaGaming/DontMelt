@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-using System.Collections.Generic;
-
+﻿using System.Collections.Generic;
 public sealed class RG_Box_Collider : RG_Collider
 {
     public Vector2Int Size = new Vector2Int(RG_Physics_Helper.Pixels_Per_Unit, RG_Physics_Helper.Pixels_Per_Unit);

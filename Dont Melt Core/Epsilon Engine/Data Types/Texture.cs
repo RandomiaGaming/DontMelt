@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-namespace DontMelt
+namespace EpsilonEngine
 {
     public sealed class Texture
     {
@@ -17,110 +17,110 @@ namespace DontMelt
             Output.data = new Color[0];
             return Output;
         }
-        public static Texture Create(int Width, int Height)
+        public static Texture Create(int width, int height)
         {
             Texture Output = new Texture();
-            if (Width < 0)
+            if (width < 0)
             {
                 throw new ArgumentOutOfRangeException("Width");
             }
-            if (Height < 0)
+            if (height < 0)
             {
                 throw new ArgumentOutOfRangeException("Height");
             }
-            Output.width = Width;
-            Output.height = Height;
-            Output.data = new Color[Width * Height];
+            Output.width = width;
+            Output.height = height;
+            Output.data = new Color[width * height];
             return Output;
         }
-        public static Texture Create(Point Dementions)
+        public static Texture Create(Point dementions)
         {
             Texture Output = new Texture();
-            if (Dementions.x < 0 || Dementions.y < 0)
+            if (dementions.x < 0 || dementions.y < 0)
             {
                 throw new ArgumentOutOfRangeException("Dementions");
             }
-            Output.width = Dementions.x;
-            Output.height = Dementions.y;
-            Output.data = new Color[Dementions.x * Dementions.y];
+            Output.width = dementions.x;
+            Output.height = dementions.y;
+            Output.data = new Color[dementions.x * dementions.y];
             return Output;
         }
-        public static Texture Create(int Width, int Height, Color FillColor)
+        public static Texture Create(int width, int height, Color fillColor)
         {
             Texture Output = new Texture();
-            if (Width < 0)
+            if (width < 0)
             {
                 throw new ArgumentOutOfRangeException("Width");
             }
-            if (Height < 0)
+            if (height < 0)
             {
                 throw new ArgumentOutOfRangeException("Height");
             }
-            Output.width = Width;
-            Output.height = Height;
-            Output.data = new Color[Width * Height];
-            for (int i = 0; i < Width * Height; i++)
+            Output.width = width;
+            Output.height = height;
+            Output.data = new Color[width * height];
+            for (int i = 0; i < width * height; i++)
             {
-                Output.data[i] = FillColor.Clone();
+                Output.data[i] = fillColor.Clone();
             }
             return Output;
         }
-        public static Texture Create(Point Dementions, Color FillColor)
+        public static Texture Create(Point dementions, Color fillColor)
         {
             Texture Output = new Texture();
-            if (Dementions.x < 0 || Dementions.y < 0)
+            if (dementions.x < 0 || dementions.y < 0)
             {
                 throw new ArgumentOutOfRangeException("Dementions");
             }
-            Output.width = Dementions.x;
-            Output.height = Dementions.y;
-            Output.data = new Color[Dementions.x * Dementions.y];
-            for (int i = 0; i < Dementions.x * Dementions.y; i++)
+            Output.width = dementions.x;
+            Output.height = dementions.y;
+            Output.data = new Color[dementions.x * dementions.y];
+            for (int i = 0; i < dementions.x * dementions.y; i++)
             {
-                Output.data[i] = FillColor.Clone();
+                Output.data[i] = fillColor.Clone();
             }
             return Output;
         }
-        public static Texture Create(int Width, int Height, Color[] Data)
+        public static Texture Create(Color[] data, int width, int height)
         {
             Texture Output = new Texture();
-            if (Width < 0)
+            if (width < 0)
             {
                 throw new ArgumentOutOfRangeException("Width");
             }
-            if (Height < 0)
+            if (height < 0)
             {
                 throw new ArgumentOutOfRangeException("Height");
             }
-            if (Data.Length != Width * Height)
+            if (data.Length != width * height)
             {
                 throw new ArgumentOutOfRangeException("Data");
             }
-            Output.width = Width;
-            Output.height = Height;
-            Output.data = new List<Color>(Data).ToArray();
+            Output.width = width;
+            Output.height = height;
+            Output.data = new List<Color>(data).ToArray();
             return Output;
         }
-        public static Texture Create(Point Dementions, Color[] Data)
+        public static Texture Create(Point dementions, Color[] data)
         {
             Texture Output = new Texture();
-            if (Dementions.x < 0 || Dementions.y < 0)
+            if (dementions.x < 0 || dementions.y < 0)
             {
                 throw new ArgumentOutOfRangeException("Dementions");
             }
-            Output.width = Dementions.x;
-            Output.height = Dementions.y;
-            Output.data = new List<Color>(Data).ToArray();
+            Output.width = dementions.x;
+            Output.height = dementions.y;
+            Output.data = new List<Color>(data).ToArray();
             return Output;
         }
 
-        public Color GetPixel(Point Position)
+        public Color GetPixel(Point position)
         {
-            if (Position.x < 0 || Position.x >= width || Position.y < 0 || Position.y >= height)
+            if (position.x < 0 || position.x >= width || position.y < 0 || position.y >= height)
             {
                 throw new ArgumentOutOfRangeException("Position");
             }
-            return data[(Position.y * width) + Position.x];
+            return data[(position.y * width) + position.x];
         }
         public Color GetPixel(int x, int y)
         {
@@ -130,72 +130,72 @@ namespace DontMelt
             }
             return data[(y * width) + x];
         }
-        public void SetPixel(Point Position, Color New_Color)
+        public void SetPixel(Point position, Color newColor)
         {
-            if (Position.x < 0 || Position.x >= width || Position.y < 0 || Position.y >= height)
+            if (position.x < 0 || position.x >= width || position.y < 0 || position.y >= height)
             {
                 throw new ArgumentOutOfRangeException("Position");
             }
-            data[(Position.y * width) + Position.x] = New_Color.Clone();
+            data[(position.y * width) + position.x] = newColor.Clone();
         }
 
-        public void Blitz(Texture Data, Point Target)
+        public void Blitz(Texture data, Point target)
         {
-            if (Target.x < 0 || Target.y < 0 || Target.x + Data.width - 1 >= width || Target.y + Data.height - 1 >= height)
+            if (target.x < 0 || target.y < 0 || target.x + data.width - 1 >= width || target.y + data.height - 1 >= height)
             {
                 throw new ArgumentOutOfRangeException("Target");
             }
-            for (int x = 0; x < Data.width; x++)
+            for (int x = 0; x < data.width; x++)
             {
-                for (int y = 0; y < Data.height; y++)
+                for (int y = 0; y < data.height; y++)
                 {
-                    SetPixel(Point.Create(x + Target.x, y + Target.y), Data.GetPixel(x, y));
+                    SetPixel(Point.Create(x + target.x, y + target.y), data.GetPixel(x, y));
                 }
             }
         }
-        public void Blitz(Texture Data, int TargetX, int TargetY)
+        public void Blitz(Texture data, int targetX, int targetY)
         {
-            if (TargetX < 0 || TargetX + Data.width - 1 >= width)
+            if (targetX < 0 || targetX + data.width - 1 >= width)
             {
-                throw new ArgumentOutOfRangeException("TargetX");
+                throw new ArgumentOutOfRangeException("Target.X");
             }
-            if (TargetY < 0 || TargetY + Data.height - 1 >= height)
+            if (targetY < 0 || targetY + data.height - 1 >= height)
             {
-                throw new ArgumentOutOfRangeException("TargetY");
+                throw new ArgumentOutOfRangeException("Target.Y");
             }
-            for (int x = 0; x < Data.width; x++)
+            for (int x = 0; x < data.width; x++)
             {
-                for (int y = 0; y < Data.height; y++)
+                for (int y = 0; y < data.height; y++)
                 {
-                    SetPixel(Point.Create(x + TargetX, y + TargetY), Data.GetPixel(x, y));
+                    SetPixel(Point.Create(x + targetX, y + targetY), data.GetPixel(x, y));
                 }
             }
         }
         //BlitzClip needs optimization because testing validity every pixel is redundant when a valid rect could be used instead.
-        public void BlitzClip(Texture Data, Point Target)
+        public void BlitzClip(Texture data, Point target)
         {
-            for (int x = 0; x < Data.width; x++)
+            for (int x = 0; x < data.width; x++)
             {
-                for (int y = 0; y < Data.height; y++)
+                for (int y = 0; y < data.height; y++)
                 {
-                    Point TargetPoint = Point.Create(x + Target.x, y + Target.y);
+                    Point TargetPoint = Point.Create(x + target.x, y + target.y);
                     if (TargetPoint.x >= 0 && TargetPoint.x < width && TargetPoint.y >= 0 && TargetPoint.y < height)
                     {
-                        SetPixel(TargetPoint, Data.GetPixel(x, y));
+                        SetPixel(TargetPoint, data.GetPixel(x, y));
                     }
                 }
             }
         }
-        public void BlitzClip(Texture Data, int TargetX, int TargetY)
+        public void BlitzClip(Texture data, int targetX, int targetY)
         {
-            for (int x = 0; x < Data.width; x++)
+            for (int x = 0; x < data.width; x++)
             {
-                for (int y = 0; y < Data.height; y++)
+                for (int y = 0; y < data.height; y++)
                 {
-                    Point TargetPoint = Point.Create(x + TargetX, y + TargetY);
+                    Point TargetPoint = Point.Create(x + targetX, y + targetY);
                     if (TargetPoint.x >= 0 && TargetPoint.x < width && TargetPoint.y >= 0 && TargetPoint.y < height)
                     {
-                        SetPixel(TargetPoint, Data.GetPixel(x, y));
+                        SetPixel(TargetPoint, data.GetPixel(x, y));
                     }
                 }
             }
@@ -205,55 +205,55 @@ namespace DontMelt
         {
             return new List<Color>(data).ToArray();
         }
-        public void SetData(Color[] Data, int Width, int Height)
+        public void SetData(Color[] data, int width, int height)
         {
-            if (Width < 0)
+            if (width < 0)
             {
                 throw new ArgumentOutOfRangeException("Width");
             }
-            if (Height < 0)
+            if (height < 0)
             {
                 throw new ArgumentOutOfRangeException("Height");
             }
-            if (Data == null)
+            if (data == null)
             {
                 throw new NullReferenceException("Data");
             }
-            if (Data.Length != (Width * Height))
+            if (data.Length != (width * height))
             {
                 throw new ArgumentOutOfRangeException("Data");
             }
-            this.data = new List<Color>(Data).ToArray();
+            this.data = new List<Color>(data).ToArray();
         }
-        public void SetData(Color[] Data, Point Dementions)
+        public void SetData(Color[] data, Point dementions)
         {
-            if (Dementions.x < 0 || Dementions.y < 0)
+            if (dementions.x < 0 || dementions.y < 0)
             {
                 throw new ArgumentOutOfRangeException("Dementions");
             }
-            if (Data == null)
+            if (data == null)
             {
                 throw new NullReferenceException("Data");
             }
-            if (Data.Length != (Dementions.x * Dementions.y))
+            if (data.Length != (dementions.x * dementions.y))
             {
                 throw new ArgumentOutOfRangeException("Data");
             }
-            width = Dementions.x;
-            height = Dementions.y;
-            this.data = new List<Color>(Data).ToArray();
+            width = dementions.x;
+            height = dementions.y;
+            this.data = new List<Color>(data).ToArray();
         }
-        public void SetData(Color[] Data)
+        public void SetData(Color[] data)
         {
-            if (Data == null)
+            if (data == null)
             {
                 throw new NullReferenceException("Data");
             }
-            if (Data.Length != this.data.Length)
+            if (data.Length != this.data.Length)
             {
                 throw new ArgumentOutOfRangeException("Data");
             }
-            this.data = new List<Color>(Data).ToArray();
+            this.data = new List<Color>(data).ToArray();
         }
 
         public Point GetDementions()

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DontMelt
+namespace EpsilonEngine
 {
     public static class MathHelper
     {

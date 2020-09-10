@@ -1,4 +1,4 @@
-namespace DontMelt
+namespace EpsilonEngine
 {
     public sealed class Point
     {
@@ -25,13 +25,13 @@ namespace DontMelt
         }
         public override bool Equals(object obj)
         {
-            if (obj.GetType() == typeof(Point))
+            if (ReferenceEquals(obj, null) || obj.GetType() != typeof(Point))
             {
-                return this == (Point)obj;
+                return false;
             }
             else
             {
-                return false;
+                return this == (Point)obj;
             }
         }
         public override int GetHashCode()
@@ -39,40 +39,40 @@ namespace DontMelt
             return base.GetHashCode();
         }
 
-        public static bool operator ==(Point A, Point B)
+        public static bool operator ==(Point a, Point b)
         {
-            return (A.x == B.x) && (A.y == B.y);
+            return (a.x == b.x) && (a.y == b.y);
         }
-        public static bool operator !=(Point A, Point B)
+        public static bool operator !=(Point a, Point b)
         {
-            return !(A == B);
-        }
-
-        public static Point operator +(Point A, Point B)
-        {
-            return Create(A.x + B.x, A.y + B.y);
-        }
-        public static Point operator -(Point A, Point B)
-        {
-            return Create(A.x - B.x, A.y - B.y);
+            return !(a == b);
         }
 
-        public static Point operator *(Point A, Point B)
+        public static Point operator +(Point a, Point b)
         {
-            return Create(A.x * B.x, A.y * B.y);
+            return Create(a.x + b.x, a.y + b.y);
         }
-        public static Point operator /(Point A, Point B)
+        public static Point operator -(Point a, Point b)
         {
-            return Create(A.x / B.x, A.y / B.y);
+            return Create(a.x - b.x, a.y - b.y);
         }
 
-        public static Point operator +(Point A)
+        public static Point operator *(Point a, Point b)
         {
-            return A;
+            return Create(a.x * b.x, a.y * b.y);
         }
-        public static Point operator -(Point A)
+        public static Point operator /(Point a, Point b)
         {
-            return Create(A.x * -1, A.y * -1);
+            return Create(a.x / b.x, a.y / b.y);
+        }
+
+        public static Point operator +(Point a)
+        {
+            return a;
+        }
+        public static Point operator -(Point a)
+        {
+            return Create(a.x * -1, a.y * -1);
         }
 
         public Point Clone()

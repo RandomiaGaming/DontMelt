@@ -1,6 +1,6 @@
 using System;
 
-namespace DontMelt
+namespace EpsilonEngine
 {
     public sealed class Color
     {
@@ -62,13 +62,13 @@ namespace DontMelt
 
         public override bool Equals(object obj)
         {
-            if (obj.GetType() == typeof(Color))
+            if (ReferenceEquals(obj, null) || obj.GetType() != typeof(Color))
             {
-                return this == (Color)obj;
+                return false;
             }
             else
             {
-                return false;
+                return this == (Color)obj;
             }
         }
 
@@ -77,26 +77,26 @@ namespace DontMelt
             return base.GetHashCode();
         }
 
-        public static bool operator ==(Color A, Color B)
+        public static bool operator ==(Color a, Color b)
         {
-            if (ReferenceEquals(A, null) && ReferenceEquals(B, null))
+            if (ReferenceEquals(a, null) && ReferenceEquals(b, null))
             {
                 return true;
             }
-            else if (ReferenceEquals(A, null) || ReferenceEquals(B, null))
+            else if (ReferenceEquals(a, null) || ReferenceEquals(b, null))
             {
                 return false;
             }
-            return (A.r == B.r) && (A.g == B.g) && (A.b == B.b);
+            return (a.r == b.r) && (a.g == b.g) && (a.b == b.b);
         }
-        public static bool operator !=(Color A, Color B)
+        public static bool operator !=(Color a, Color b)
         {
-            return !(A == B);
+            return !(a == b);
         }
 
-        public static Color Mix(Color A, Color B)
+        public static Color Mix(Color a, Color b)
         {
-            return Create((A.r + B.r) / 2, (A.g + B.g) / 2, (A.b + B.b) / 2);
+            return Create((a.r + b.r) / 2, (a.g + b.g) / 2, (a.b + b.b) / 2);
         }
 
         public Color Clone()

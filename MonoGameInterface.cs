@@ -1,15 +1,15 @@
-﻿using DontMelt;
-using DontMelt.Internal;
+﻿using EpsilonEngine;
+using EpsilonEngine.Internal;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
 
-public class InterfaceGame : Game
+public class MonoGameInterface : Game
 {
     private GraphicsDeviceManager graphicsDeviceManager = null;
     private OutputPacket lastPacket = null;
-    public InterfaceGame()
+    public MonoGameInterface()
     {
         Content.RootDirectory = "Dont Melt Core/Assets";
         graphicsDeviceManager = new GraphicsDeviceManager(this);
@@ -32,8 +32,8 @@ public class InterfaceGame : Game
         MouseState mouseState = Mouse.GetState();
         double mouseX = (double)mouseState.X / GraphicsDevice.Viewport.Width * 256;
         double mouseY = 144 - ((double)mouseState.Y / GraphicsDevice.Viewport.Height * 144);
-        DontMelt.Point mousePosition = DontMelt.Point.Create((int)mouseX, (int)mouseY);
-        DontMelt.Point keyDirection = DontMelt.Point.Create(0, 0);
+        EpsilonEngine.Point mousePosition = EpsilonEngine.Point.Create((int)mouseX, (int)mouseY);
+        EpsilonEngine.Point keyDirection = EpsilonEngine.Point.Create(0, 0);
         if (Keyboard.GetState().IsKeyDown(Keys.W))
         {
             keyDirection.y = 1;
@@ -71,7 +71,7 @@ public class InterfaceGame : Game
             {
                 for (int y = 0; y < FrameHeight; y++)
                 {
-                    DontMelt.Color DontMeltColor = lastPacket.frameTexture.GetPixel(DontMelt.Point.Create(x, FrameHeight - y - 1));
+                    EpsilonEngine.Color DontMeltColor = lastPacket.frameTexture.GetPixel(EpsilonEngine.Point.Create(x, FrameHeight - y - 1));
                     MonoGameFrameColors[(y * FrameWidth) + x] = new Microsoft.Xna.Framework.Color(DontMeltColor.r / 255f, DontMeltColor.g / 255f, DontMeltColor.b / 255f);
                 }
             }

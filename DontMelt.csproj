@@ -61,18 +61,29 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
-    <Compile Include="Dont Melt Core\Data Types\InputPacket.cs" />
-    <Compile Include="Dont Melt Core\Data Types\OutputPacket.cs" />
-    <Compile Include="Dont Melt Core\Data Types\UpdatePacket.cs" />
-    <Compile Include="Dont Melt Core\Engine\Component.cs" />
-    <Compile Include="Dont Melt Core\Engine\DontMeltKernal.cs" />
-    <Compile Include="Dont Melt Core\Engine\GameObject.cs" />
-    <Compile Include="Dont Melt Core\Helpers\MathHelper.cs" />
-    <Compile Include="InterfaceGame.cs" />
-    <Compile Include="Dont Melt Core\Data Types\Rectangle.cs" />
-    <Compile Include="Dont Melt Core\Data Types\Color.cs" />
-    <Compile Include="Dont Melt Core\Data Types\Texture.cs" />
-    <Compile Include="Dont Melt Core\Data Types\Point.cs" />
+    <Compile Include="Dont Melt Core\Epsilon Engine\AssetLoader.cs" />
+    <Compile Include="Dont Melt Core\Epsilon Engine\Data Types\Collision.cs" />
+    <Compile Include="Dont Melt Core\Epsilon Engine\Data Types\InputPacket.cs" />
+    <Compile Include="Dont Melt Core\Epsilon Engine\Data Types\OutputPacket.cs" />
+    <Compile Include="Dont Melt Core\Epsilon Engine\Data Types\Overlap.cs" />
+    <Compile Include="Dont Melt Core\Epsilon Engine\Data Types\SideInfo.cs" />
+    <Compile Include="Dont Melt Core\Epsilon Engine\Data Types\UpdatePacket.cs" />
+    <Compile Include="Dont Melt Core\Epsilon Engine\Component.cs" />
+    <Compile Include="Dont Melt Core\Epsilon Engine\Embeded Components\BoxCollider.cs" />
+    <Compile Include="Dont Melt Core\Epsilon Engine\Embeded Components\Collider.cs" />
+    <Compile Include="Dont Melt Core\Epsilon Engine\Embeded Components\CustomCollider.cs" />
+    <Compile Include="Dont Melt Core\Epsilon Engine\Embeded Components\Rigidbody.cs" />
+    <Compile Include="Dont Melt Core\Epsilon Engine\Embeded Components\SpriteCollider.cs" />
+    <Compile Include="Dont Melt Core\Epsilon Engine\EngineKernal.cs" />
+    <Compile Include="Dont Melt Core\Epsilon Engine\GameManager.cs" />
+    <Compile Include="Dont Melt Core\Epsilon Engine\GameObject.cs" />
+    <Compile Include="Dont Melt Core\Epsilon Engine\Helpers\MathHelper.cs" />
+    <Compile Include="Dont Melt Core\Epsilon Engine\Helpers\RandomnessHelper.cs" />
+    <Compile Include="MonoGameInterface.cs" />
+    <Compile Include="Dont Melt Core\Epsilon Engine\Data Types\Rectangle.cs" />
+    <Compile Include="Dont Melt Core\Epsilon Engine\Data Types\Color.cs" />
+    <Compile Include="Dont Melt Core\Epsilon Engine\Data Types\Texture.cs" />
+    <Compile Include="Dont Melt Core\Epsilon Engine\Data Types\Point.cs" />
     <Compile Include="Program.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -90,6 +101,7 @@
     <Folder Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Player.png" />
     <Content Include="Dont Melt Icon.ico" />
   </ItemGroup>
   <ItemGroup>
