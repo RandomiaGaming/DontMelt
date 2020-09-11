@@ -149,11 +149,11 @@ namespace EpsilonEngine
             output.screenSpaceGraphic = screenSpaceGraphic;
             return output;
         }
-        private static int[] takenIDs = new int[0];
-        private int ID = 0;
+        public static int nextFreeID = 0;
+        private readonly int ID = 0;
         public override bool Equals(object obj)
         {
-            if (ReferenceEquals(obj, null) || obj.GetType() != typeof(GameObject))
+            if (obj is null || obj.GetType() != typeof(GameObject))
             {
                 return false;
             }
@@ -168,11 +168,11 @@ namespace EpsilonEngine
         }
         public static bool operator ==(GameObject a, GameObject b)
         {
-            if (ReferenceEquals(a, null) && ReferenceEquals(b, null))
+            if (a is null && b is null)
             {
                 return true;
             }
-            else if (ReferenceEquals(a, null) || ReferenceEquals(b, null))
+            else if (a is null || b is null)
             {
                 return false;
             }
@@ -184,20 +184,8 @@ namespace EpsilonEngine
         }
         private GameObject()
         {
-            bool TryAgain = true;
-            while (TryAgain)
-            {
-                TryAgain = false;
-                ID = RandomnessHelper.Next(0, int.MaxValue);
-                for (int i = 0; i < takenIDs.Length; i++)
-                {
-                    if (takenIDs[i] == ID)
-                    {
-                        TryAgain = true;
-                        break;
-                    }
-                }
-            }
+            ID = nextFreeID;
+            nextFreeID++;
         }
     }
 }

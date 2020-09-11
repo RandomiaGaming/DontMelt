@@ -1,13 +1,13 @@
 ﻿using EpsilonEngine;
-using EpsilonEngine.Internal;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
+using System.Collections.Generic;
 
 public class MonoGameInterface : Game
 {
-    private GraphicsDeviceManager graphicsDeviceManager = null;
+    private readonly GraphicsDeviceManager graphicsDeviceManager = null;
     private OutputPacket lastPacket = null;
     public MonoGameInterface()
     {
@@ -22,7 +22,7 @@ public class MonoGameInterface : Game
         Window.AllowUserResizing = true;
         IsMouseVisible = true;
         IsFixedTimeStep = false;
-        DontMeltKernal.Initialize();
+        EngineKernal.Initialize();
         base.Initialize();
     }
     protected override void Update(GameTime gameTime)
@@ -33,26 +33,9 @@ public class MonoGameInterface : Game
         double mouseX = (double)mouseState.X / GraphicsDevice.Viewport.Width * 256;
         double mouseY = 144 - ((double)mouseState.Y / GraphicsDevice.Viewport.Height * 144);
         EpsilonEngine.Point mousePosition = EpsilonEngine.Point.Create((int)mouseX, (int)mouseY);
-        EpsilonEngine.Point keyDirection = EpsilonEngine.Point.Create(0, 0);
-        if (Keyboard.GetState().IsKeyDown(Keys.W))
-        {
-            keyDirection.y = 1;
-        }
-        else if (Keyboard.GetState().IsKeyDown(Keys.S))
-        {
-            keyDirection.y = -1;
-        }
-        if (Keyboard.GetState().IsKeyDown(Keys.D))
-        {
-            keyDirection.x = 1;
-        }
-        else if (Keyboard.GetState().IsKeyDown(Keys.A))
-        {
-            keyDirection.x = -1;
-        }
-        InputPacket inputPacket = InputPacket.Create(new KeyCode[0], new KeyCode[0], new KeyCode[0], mousePosition, keyDirection);
+        InputPacket inputPacket = InputPacket.Create(GetPressedKeys(), mousePosition, 0);
         UpdatePacket Packet = UpdatePacket.Create(deltaTime, elapsedTime, inputPacket);
-        lastPacket = DontMeltKernal.Update(Packet);
+        lastPacket = EngineKernal.Update(Packet);
         if (lastPacket.requestExit)
         {
             Exit();
@@ -83,5 +66,49 @@ public class MonoGameInterface : Game
             FrameSpriteBatch.End();
         }
         base.Draw(gameTime);
+    }
+    private KeyCode[] GetPressedKeys()
+    {
+        List<KeyCode> output = new List<KeyCode>();
+        foreach (Keys key in Keyboard.GetState().GetPressedKeys())
+        {
+            if (key == Keys.W)
+            {
+                output.Add(KeyCode.W);
+            }
+            else if (key == Keys.A)
+            {
+                output.Add(KeyCode.A);
+            }
+            else if (key == Keys.S)
+            {
+                output.Add(KeyCode.S);
+            }
+            else if (key == Keys.D)
+            {
+                output.Add(KeyCode.D);
+            }
+            else if (key == Keys.Space)
+            {
+                output.Add(KeyCode.Space);
+            }
+            else if (key == Keys.LeftShift || key == Keys.RightShift)
+            {
+                output.Add(KeyCode.Shift);
+            }
+        }
+        if (Mouse.GetState().LeftButton == ButtonState.Pressed)
+        {
+            output.Add(KeyCode.Mouse0);
+        }
+        if (Mouse.GetState().RightButton == ButtonState.Pressed)
+        {
+            output.Add(KeyCode.Mouse2);
+        }
+        if (Mouse.GetState().MiddleButton == ButtonState.Pressed)
+        {
+            output.Add(KeyCode.Mouse1);
+        }
+        return output.ToArray();
     }
 }

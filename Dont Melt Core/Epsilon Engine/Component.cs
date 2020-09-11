@@ -1,14 +1,12 @@
-using System;
-
 namespace EpsilonEngine
 {
     public class Component
     {
-        private static int[] takenIDs = new int[0];
-        private int ID = 0;
+        public static int nextFreeID { set; protected get; } = 0;
+        public int ID { get; protected set; } = 0;
         public override bool Equals(object obj)
         {
-            if (ReferenceEquals(obj, null) || obj.GetType() != typeof(Component))
+            if (obj is null || obj.GetType() != typeof(Component))
             {
                 return false;
             }
@@ -23,11 +21,11 @@ namespace EpsilonEngine
         }
         public static bool operator ==(Component a, Component b)
         {
-            if (ReferenceEquals(a, null) && ReferenceEquals(b, null))
+            if (a is null && b is null)
             {
                 return true;
             }
-            else if (ReferenceEquals(a, null) || ReferenceEquals(b, null))
+            else if (a is null || b is null)
             {
                 return false;
             }
@@ -39,20 +37,8 @@ namespace EpsilonEngine
         }
         protected Component()
         {
-            bool TryAgain = true;
-            while (TryAgain)
-            {
-                TryAgain = false;
-                ID = RandomnessHelper.Next(0, int.MaxValue);
-                for (int i = 0; i < takenIDs.Length; i++)
-                {
-                    if (takenIDs[i] == ID)
-                    {
-                        TryAgain = true;
-                        break;
-                    }
-                }
-            }
+            ID = nextFreeID;
+            nextFreeID++;
         }
         private GameObject _parent = null;
         public GameObject parent

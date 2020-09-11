@@ -1,127 +1,94 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+
 namespace EpsilonEngine
 {
-    public class Collider : Component
+    public sealed class Collider : Component
     {
-        private Collision[] collisions = new Collision[0];
-        private Overlap[] overlaps = new Overlap[0];
-        protected Rectangle[] shape = new Rectangle[0];
+        public static Collider[] loadedColliders { get; private set; } = new Collider[0];
+        private Collision[] _collisions = new Collision[0];
+        public Collision[] collisions { get { return new List<Collision>(_collisions).ToArray(); } private set { _collisions = value; } }
+        private Overlap[] _overlaps = new Overlap[0];
+        public Overlap[] overlaps { get { return new List<Overlap>(_overlaps).ToArray(); } private set { _overlaps = value; } }
 
+        public Rectangle shape = Rectangle.Create(Point.Create(0, 0), Point.Create(EngineKernal.pixelsPerUnit, EngineKernal.pixelsPerUnit));
         public Point offset = Point.Create(0, 0);
         public SideInfo sideCollision = SideInfo.Create(true);
         public bool trigger = false;
-
-        public virtual void LogCollision(Collider otherCollider, SideInfo sideInfo)
+        public void LogCollision(Collider otherCollider, SideInfo sideInfo)
         {
-            RG_Collision New_Collision = RG_Collision.Create();
-            New_Collision.Other_Game_Object = OtherRGC;
-            New_Collision.Other_Collider = OtherRGC;
-            New_Collision.Side_Info = SideInfo;
-            for (int i = 0; i < Collisions.Count; i++)
-            {
-                if (Collisions[i].Other_Collider == OtherRGC)
-                {
-                    if (Collisions[i].Side_Info.Bottom)
-                    {
-                        New_Collision.Side_Info.Bottom = true;
-                    }
-
-                    if (Collisions[i].Side_Info.Top)
-                    {
-                        New_Collision.Side_Info.Top = true;
-                    }
-
-                    if (Collisions[i].Side_Info.Right)
-                    {
-                        New_Collision.Side_Info.Right = true;
-                    }
-
-                    if (Collisions[i].Side_Info.Left)
-                    {
-                        New_Collision.Side_Info.Left = true;
-                    }
-
-                    Collisions.RemoveAt(i);
-                    i--;
-                }
-            }
-
-            Collisions.Add(New_Collision);
+            Collision newCollision = Collision.Create();
+            newCollision.otherGameObject = otherCollider.parent;
+            newCollision.otherCollider = otherCollider;
+            newCollision.thisCollider = this;
+            newCollision.thisGameObject = parent;
+            newCollision.sideInfo = sideInfo.Clone();
+            List<Collision> temp = new List<Collision>(collisions);
+            temp.Add(newCollision);
+            collisions = temp.ToArray();
         }
-
-        public virtual void LogOverlap(Collider OtherRGC)
+        public void LogOverlap(Collider otherCollider)
         {
-            RG_Trigger_Overlap New_Trigger_Overlap = RG_Trigger_Overlap.Create();
-            New_Trigger_Overlap.Other_Game_Object = OtherRGC.gameObject;
-            New_Trigger_Overlap.Other_Collider = OtherRGC;
-            for (int i = 0; i < Collisions.Count; i++)
-            {
-                if (Collisions[i].Other_Collider == OtherRGC)
-                {
-                    Collisions.RemoveAt(i);
-                }
-            }
-
-            Trigger_Overlaps.Add(New_Trigger_Overlap);
+            Overlap newOverlap = Overlap.Create();
+            newOverlap.otherGameObject = otherCollider.parent;
+            newOverlap.otherCollider = otherCollider;
+            newOverlap.thisCollider = this;
+            newOverlap.thisGameObject = parent;
+            List<Overlap> temp = new List<Overlap>(overlaps);
+            temp.Add(newOverlap);
+            overlaps = temp.ToArray();
         }
-
-        public virtual List<RG_Bounds> Get_Collider_Shape_Local()
+        public void Flush()
         {
-            List<RG_Bounds> Output = new List<RG_Bounds>();
-            foreach (RG_Bounds This_Bounds in Collider_Shape)
-            {
-                Output.Add(RG_Bounds.Create(This_Bounds.Get_Min() + Offset, This_Bounds.Get_Max() + Offset));
-            }
-            return Output;
+            collisions = new Collision[0];
+            overlaps = new Overlap[0];
         }
-
-        public virtual List<RG_Bounds> Get_Collider_Shape_World()
+        private Collider()
         {
-            List<RG_Bounds> Output = new List<RG_Bounds>();
-            foreach (RG_Bounds This_Bounds in Collider_Shape)
-            {
-                Output.Add(new RG_Bounds(Delocalize(This_Bounds.Min + Offset), Delocalize(This_Bounds.Max + Offset)));
-            }
-
-            return Output;
-        }
-
-        public virtual List<RG_Collision> Get_Collisions()
-        {
-            return new List<RG_Collision>(Collisions);
-        }
-
-        public virtual List<RG_Trigger_Overlap> Get_Trigger_Overlaps()
-        {
-            return new List<RG_Trigger_Overlap>(Trigger_Overlaps);
-        }
-
-        public virtual Vector2Int Localize(Vector2Int PixelPoint)
-        {
-            return PixelPoint - RG_Physics_Helper.World_To_Pixel(transform.position);
-        }
-
-        public virtual Vector2Int Delocalize(Vector2Int LocalPoint)
-        {
-            return LocalPoint + RG_Physics_Helper.World_To_Pixel(transform.position);
-        }
-        public override void Update(UpdatePacket Packet)
-        {
-            Console.WriteLine(1 / Packet.deltaTime.TotalSeconds);
-            parent.position += Packet.inputPacket.keyDirection;
+            ID = nextFreeID;
+            nextFreeID++;
+            List<Collider> temp = new List<Collider>(loadedColliders);
+            temp.Add(this);
+            loadedColliders = temp.ToArray();
         }
         public static new Component Create(GameObject parent)
         {
-            Component output = new Collider();
+            Collider output = new Collider();
+            output.offset = Point.Create(0, 0);
+            output.trigger = false;
+            output.shape = Rectangle.Create(Point.Create(0, 0), Point.Create(0, 0));
+            output.collisions = new Collision[0];
+            output.overlaps = new Overlap[0];
+            output.sideCollision = SideInfo.Create(true);
             output.parent = parent;
             return output;
         }
-        public static new TestComponent Create()
+        public static Component Create(GameObject parent, Rectangle shape)
         {
-            TestComponent output = new TestComponent();
-            output.name = "Unnamed Component";
+            Collider output = new Collider();
+            output.offset = Point.Create(0, 0);
+            output.trigger = false;
+            output.shape = shape.Clone();
+            output.collisions = new Collision[0];
+            output.overlaps = new Overlap[0];
+            output.sideCollision = SideInfo.Create(true);
+            output.parent = parent;
+            return output;
+        }
+        public static new Collider Create()
+        {
+            Collider output = new Collider();
+            output.offset = Point.Create(0, 0);
+            output.trigger = false;
+            output.shape = Rectangle.Create(Point.Create(0, 0), Point.Create(0, 0));
+            output.collisions = new Collision[0];
+            output.overlaps = new Overlap[0];
+            output.sideCollision = SideInfo.Create(true);
             output.parent = null;
+            return output;
+        }
+        public Rectangle GetWorldShape()
+        {
+            Rectangle output = Rectangle.Create(shape.min + parent.position + offset, shape.max + parent.position + offset);
             return output;
         }
     }

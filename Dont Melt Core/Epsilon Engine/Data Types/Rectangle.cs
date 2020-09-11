@@ -54,7 +54,7 @@ namespace EpsilonEngine
         }
         public override bool Equals(object obj)
         {
-            if (ReferenceEquals(obj, null) || obj.GetType() != typeof(Rectangle))
+            if (obj is null || obj.GetType() != typeof(Rectangle))
             {
                 return false;
             }
@@ -69,11 +69,11 @@ namespace EpsilonEngine
         }
         public static bool operator ==(Rectangle a, Rectangle b)
         {
-            if (ReferenceEquals(a, null) && ReferenceEquals(b, null))
+            if (a is null && b is null)
             {
                 return true;
             }
-            else if (ReferenceEquals(a, null) || ReferenceEquals(b, null))
+            else if (a is null || b is null)
             {
                 return false;
             }

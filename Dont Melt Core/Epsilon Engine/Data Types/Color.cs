@@ -62,7 +62,7 @@ namespace EpsilonEngine
 
         public override bool Equals(object obj)
         {
-            if (ReferenceEquals(obj, null) || obj.GetType() != typeof(Color))
+            if (obj is null || obj.GetType() != typeof(Color))
             {
                 return false;
             }
@@ -79,11 +79,11 @@ namespace EpsilonEngine
 
         public static bool operator ==(Color a, Color b)
         {
-            if (ReferenceEquals(a, null) && ReferenceEquals(b, null))
+            if (a is null && b is null)
             {
                 return true;
             }
-            else if (ReferenceEquals(a, null) || ReferenceEquals(b, null))
+            else if (a is null || b is null)
             {
                 return false;
             }
@@ -93,12 +93,6 @@ namespace EpsilonEngine
         {
             return !(a == b);
         }
-
-        public static Color Mix(Color a, Color b)
-        {
-            return Create((a.r + b.r) / 2, (a.g + b.g) / 2, (a.b + b.b) / 2);
-        }
-
         public Color Clone()
         {
             Color Output = new Color();

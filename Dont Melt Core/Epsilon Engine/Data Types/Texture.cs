@@ -138,55 +138,20 @@ namespace EpsilonEngine
             }
             data[(position.y * width) + position.x] = newColor.Clone();
         }
+        public void SetPixel(int x, int y, Color newColor)
+        {
+            if (x < 0 || x >= width)
+            {
+                throw new ArgumentOutOfRangeException("Position.x");
+            }
+            if (y < 0 || y >= width)
+            {
+                throw new ArgumentOutOfRangeException("Position.y");
+            }
+            data[(y * width) + x] = newColor.Clone();
+        }
 
-        public void Blitz(Texture data, Point target)
-        {
-            if (target.x < 0 || target.y < 0 || target.x + data.width - 1 >= width || target.y + data.height - 1 >= height)
-            {
-                throw new ArgumentOutOfRangeException("Target");
-            }
-            for (int x = 0; x < data.width; x++)
-            {
-                for (int y = 0; y < data.height; y++)
-                {
-                    SetPixel(Point.Create(x + target.x, y + target.y), data.GetPixel(x, y));
-                }
-            }
-        }
-        public void Blitz(Texture data, int targetX, int targetY)
-        {
-            if (targetX < 0 || targetX + data.width - 1 >= width)
-            {
-                throw new ArgumentOutOfRangeException("Target.X");
-            }
-            if (targetY < 0 || targetY + data.height - 1 >= height)
-            {
-                throw new ArgumentOutOfRangeException("Target.Y");
-            }
-            for (int x = 0; x < data.width; x++)
-            {
-                for (int y = 0; y < data.height; y++)
-                {
-                    SetPixel(Point.Create(x + targetX, y + targetY), data.GetPixel(x, y));
-                }
-            }
-        }
-        //BlitzClip needs optimization because testing validity every pixel is redundant when a valid rect could be used instead.
-        public void BlitzClip(Texture data, Point target)
-        {
-            for (int x = 0; x < data.width; x++)
-            {
-                for (int y = 0; y < data.height; y++)
-                {
-                    Point TargetPoint = Point.Create(x + target.x, y + target.y);
-                    if (TargetPoint.x >= 0 && TargetPoint.x < width && TargetPoint.y >= 0 && TargetPoint.y < height)
-                    {
-                        SetPixel(TargetPoint, data.GetPixel(x, y));
-                    }
-                }
-            }
-        }
-        public void BlitzClip(Texture data, int targetX, int targetY)
+        public void Blitz(Texture data, int targetX, int targetY, bool ignoreAlpha)
         {
             for (int x = 0; x < data.width; x++)
             {
@@ -195,7 +160,51 @@ namespace EpsilonEngine
                     Point TargetPoint = Point.Create(x + targetX, y + targetY);
                     if (TargetPoint.x >= 0 && TargetPoint.x < width && TargetPoint.y >= 0 && TargetPoint.y < height)
                     {
-                        SetPixel(TargetPoint, data.GetPixel(x, y));
+                        if (ignoreAlpha)
+                        {
+                            Color newColor = data.GetPixel(x, y);
+                            SetPixel(TargetPoint, newColor);
+                        }
+                        else
+                        {
+                            Color originalColor = GetPixel(TargetPoint);
+                            Color newColor = data.GetPixel(x, y);
+                            Color mixedColor = originalColor.Clone();
+                            mixedColor.a = 255;
+                            mixedColor.r = ((originalColor.r * (255 - newColor.a)) + (newColor.r * newColor.a)) / 255;
+                            mixedColor.g = ((originalColor.g * (255 - newColor.a)) + (newColor.g * newColor.a)) / 255;
+                            mixedColor.b = ((originalColor.b * (255 - newColor.a)) + (newColor.b * newColor.a)) / 255;
+                            SetPixel(TargetPoint, mixedColor);
+                        }
+                    }
+                }
+            }
+        }
+        public void Blitz(Texture data, Point target, bool ignoreAlpha)
+        {
+            for (int x = 0; x < data.width; x++)
+            {
+                for (int y = 0; y < data.height; y++)
+                {
+                    Point TargetPoint = Point.Create(x + target.x, y + target.y);
+                    if (TargetPoint.x >= 0 && TargetPoint.x < width && TargetPoint.y >= 0 && TargetPoint.y < height)
+                    {
+                        if (ignoreAlpha)
+                        {
+                            Color newColor = data.GetPixel(x, y);
+                            SetPixel(TargetPoint, newColor);
+                        }
+                        else
+                        {
+                            Color originalColor = GetPixel(TargetPoint);
+                            Color newColor = data.GetPixel(x, y);
+                            Color mixedColor = originalColor.Clone();
+                            mixedColor.a = 255;
+                            mixedColor.r = ((originalColor.r * (255 - newColor.a)) + (newColor.r * newColor.a)) / 255;
+                            mixedColor.g = ((originalColor.g * (255 - newColor.a)) + (newColor.g * newColor.a)) / 255;
+                            mixedColor.b = ((originalColor.b * (255 - newColor.a)) + (newColor.b * newColor.a)) / 255;
+                            SetPixel(TargetPoint, mixedColor);
+                        }
                     }
                 }
             }
