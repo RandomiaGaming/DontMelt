@@ -31,5 +31,16 @@ namespace EpsilonEngine
             mouseScroll = 0;
             return output;
         }
+        public bool KeyDown(KeyCode keyCode)
+        {
+            for (int i = 0; i < heldKeys.Length; i++)
+            {
+                if (heldKeys[i] == keyCode)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 }

@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
+using DontMelt;
 namespace EpsilonEngine
 {
-    public static class EngineKernal
+    public static class EpsilonKernal
     {
         public static Point veiwPortSize = Point.Create(256, 144);
         public static int pixelsPerUnit = 16;
@@ -29,7 +30,7 @@ namespace EpsilonEngine
             }
             return OutputPacket.Create(renderTexture, false);
         }
-        public static void Initialize()
+        public static void Initialize(InitializationPacket packet)
         {
             for (int i = 0; i < 16; i++)
             {
@@ -46,6 +47,7 @@ namespace EpsilonEngine
             player.name = "Player";
             player.screenSpaceGraphic = true;
             player.AddComponent(Rigidbody.Create(player));
+            player.AddComponent(Player.Create(player));
             player.AddComponent(Collider.Create(player, Rectangle.Create(Point.Create(2, 2), Point.Create(14, 14))));
             loadedGameObjects.Add(player);
 

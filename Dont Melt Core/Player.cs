@@ -1,25 +1,17 @@
 ﻿using EpsilonEngine;
 namespace DontMelt
 {
-    public enum DeathState
-    {
-        Dead,
-        Alive,
-        Animating
-    }
     public class Player : Component
     {
         public Rigidbody rigidbody;
         public Collider collider;
-        private DeathState CurrentDeathState = DeathState.Alive;
         private SideInfo touchingGround = SideInfo.Create(false);
 
-        private const float MoveForce = 20;
-        private const float MaxMoveSpeed = 6.5f;
-        private const float JumpForce = 8.5f;
-        private const float WalljumpForceX = 8.5f;
-        private const float WalljumpForceY = 6;
-        private const float DragForce = 8;
+        private static float moveForce = 20;
+        private static float jumpForce = 8.5f;
+        private static float maxMoveSpeed = 6.5f;
+        private static Vector wallJumpForce = Vector.Create(8.5, 6);
+        private static float dragForce = 8;
         public override void Initialize()
         {
             rigidbody = (Rigidbody)parent.GetComponent(typeof(Rigidbody));
@@ -27,91 +19,113 @@ namespace DontMelt
         }
         public override void Update(UpdatePacket packet)
         {
+            Collision(packet);
             Move(packet);
             Jump(packet);
             Drag(packet);
-            Collision(packet);
         }
         private void Jump(UpdatePacket packet)
         {
-            if (TouchingGround.y < 0 && Input_Manager.Jump_Down())
+            if (packet.inputPacket.KeyDown(KeyCode.Space))
             {
-                RGRB.Velocity.y = JumpForce;
-            }
-            else if (Input_Manager.Jump_Down() && TouchingGround.x < 0)
-            {
-                RGRB.Velocity = new Vector2(WalljumpForceX, WalljumpForceY);
-            }
-            else if (Input_Manager.Jump_Down() && TouchingGround.x > 0)
-            {
-                RGRB.Velocity = new Vector2(-WalljumpForceX, WalljumpForceY);
+                if (touchingGround.bottom)
+                {
+                    rigidbody.velocity.y = jumpForce;
+                }
+                else if (touchingGround.left)
+                {
+                    rigidbody.velocity = wallJumpForce.Clone();
+                }
+                else if (touchingGround.right)
+                {
+                    rigidbody.velocity = wallJumpForce * Vector.Create(-1, 1);
+                }
             }
         }
 
         private void Move(UpdatePacket packet)
         {
-            if (Input_Manager.Move_Axis() != 0)
+            int moveAxis = 0;
+            bool dDown = packet.inputPacket.KeyDown(KeyCode.D);
+            bool adown = packet.inputPacket.KeyDown(KeyCode.A);
+            if (dDown && !adown)
             {
-                transform.localScale = new Vector3(Input_Manager.Move_Axis(), 1, 1);
+                moveAxis = 1;
+            }
+            else if (!dDown && adown)
+            {
+                moveAxis = -1;
             }
 
-            if ((RGRB.Velocity.x < MaxMoveSpeed && Input_Manager.Move_Axis() == 1) ||
-                (RGRB.Velocity.x > -MaxMoveSpeed && Input_Manager.Move_Axis() == -1))
+            if (rigidbody.velocity.x < maxMoveSpeed && moveAxis == 1)
             {
-                RGRB.Velocity += new Vector2(MoveForce * Input_Manager.Move_Axis() * Time.deltaTime, 0);
+                rigidbody.velocity.x += moveForce * packet.deltaTime.TotalSeconds;
+            }
+            else if (rigidbody.velocity.x > -maxMoveSpeed && moveAxis == -1)
+            {
+                rigidbody.velocity.x += -moveForce * packet.deltaTime.TotalSeconds;
             }
         }
 
         private void Drag(UpdatePacket packet)
         {
-            float Sign = Mathf.Sign(RGRB.Velocity.x);
-            RGRB.Velocity -= new Vector2(DragForce * Sign * Time.deltaTime, 0);
-            if (Mathf.Sign(RGRB.Velocity.x) != Sign)
+            if (rigidbody.velocity.x > 0)
             {
-                RGRB.Velocity = new Vector2(0, RGRB.Velocity.y);
+                rigidbody.velocity.x -= dragForce * packet.deltaTime.TotalSeconds;
+                rigidbody.velocity.x = MathHelper.Clamp(rigidbody.velocity.x, 0, double.MaxValue);
+            }
+            else if (rigidbody.velocity.x > 0)
+            {
+                rigidbody.velocity.x -= -dragForce * packet.deltaTime.TotalSeconds;
+                rigidbody.velocity.x = MathHelper.Clamp(rigidbody.velocity.x, double.MinValue, 0);
             }
         }
 
         private void Collision(UpdatePacket packet)
         {
-            TouchingGround = Vector2Int.zero;
-            foreach (RG_Collision collision in MainCollider.Get_Collisions())
+            touchingGround = SideInfo.Create(false);
+            foreach (Collision c in collider.collisions)
             {
-                if (collision.Other_GameObject.tag == "Hazzard")
+                if (c.sideInfo.bottom)
                 {
-                    KillPlayer();
+                    touchingGround.bottom = true;
                 }
-
-                if (collision.Other_Collider.gameObject.tag == "Ground" && !collision.Other_Collider.Is_Trigger)
+                if (c.sideInfo.top)
                 {
-                    if (collision.Side.Bottom)
-                    {
-                        TouchingGround.y = -1;
-                    }
-                    else if (collision.Side.Left)
-                    {
-                        TouchingGround.x = -1;
-                    }
-                    else if (collision.Side.Right)
-                    {
-                        TouchingGround.x = 1;
-                    }
+                    touchingGround.top = true;
                 }
-
-                if (collision.Side.Top && collision.Side.Bottom && collision.Side.Left &&
-                    collision.Side.Right && collision.Other_Collider.Is_Trigger == false)
+                if (c.sideInfo.left)
                 {
-                    KillPlayer();
+                    touchingGround.left = true;
                 }
-
-                foreach (RG_Trigger_Overlap overlap in MainCollider.Get_Trigger_Overlaps())
+                if (c.sideInfo.right)
                 {
-                    if (overlap.Other_GameObject.tag == "Hazzard")
-                    {
-                        KillPlayer();
-                    }
+                    touchingGround.right = true;
                 }
             }
+        }
+        private Player()
+        {
+            ID = nextFreeID;
+            nextFreeID++;
+        }
+        public static new Player Create(GameObject parent)
+        {
+            Player output = new Player();
+            output.touchingGround = SideInfo.Create(false);
+            output.rigidbody = null;
+            output.collider = null;
+            output.parent = parent;
+            return output;
+        }
+        public static new Player Create()
+        {
+            Player output = new Player();
+            output.touchingGround = SideInfo.Create(false);
+            output.rigidbody = null;
+            output.collider = null;
+            output.parent = null;
+            return output;
         }
     }
 }

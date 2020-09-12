@@ -10,10 +10,15 @@ namespace EpsilonEngine
         private Overlap[] _overlaps = new Overlap[0];
         public Overlap[] overlaps { get { return new List<Overlap>(_overlaps).ToArray(); } private set { _overlaps = value; } }
 
-        public Rectangle shape = Rectangle.Create(Point.Create(0, 0), Point.Create(EngineKernal.pixelsPerUnit, EngineKernal.pixelsPerUnit));
+        public Rectangle shape = Rectangle.Create(Point.Create(0, 0), Point.Create(EpsilonKernal.pixelsPerUnit, EpsilonKernal.pixelsPerUnit));
         public Point offset = Point.Create(0, 0);
         public SideInfo sideCollision = SideInfo.Create(true);
         public bool trigger = false;
+
+        public override void Update(UpdatePacket packet)
+        {
+            Flush();
+        }
         public void LogCollision(Collider otherCollider, SideInfo sideInfo)
         {
             Collision newCollision = Collision.Create();

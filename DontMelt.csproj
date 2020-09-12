@@ -61,27 +61,28 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
-    <Compile Include="Dont Melt Core\Epsilon Engine\AssetLoader.cs" />
-    <Compile Include="Dont Melt Core\Epsilon Engine\Data Types\Collision.cs" />
-    <Compile Include="Dont Melt Core\Epsilon Engine\Data Types\InputPacket.cs" />
-    <Compile Include="Dont Melt Core\Epsilon Engine\Data Types\OutputPacket.cs" />
-    <Compile Include="Dont Melt Core\Epsilon Engine\Data Types\Overlap.cs" />
-    <Compile Include="Dont Melt Core\Epsilon Engine\Data Types\Vector.cs" />
-    <Compile Include="Dont Melt Core\Epsilon Engine\Data Types\SideInfo.cs" />
-    <Compile Include="Dont Melt Core\Epsilon Engine\Data Types\UpdatePacket.cs" />
-    <Compile Include="Dont Melt Core\Epsilon Engine\Component.cs" />
-    <Compile Include="Dont Melt Core\Epsilon Engine\Embeded Components\Collider.cs" />
-    <Compile Include="Dont Melt Core\Epsilon Engine\Embeded Components\Rigidbody.cs" />
-    <Compile Include="Dont Melt Core\Epsilon Engine\EngineKernal.cs" />
-    <Compile Include="Dont Melt Core\Epsilon Engine\GameObject.cs" />
-    <Compile Include="Dont Melt Core\Epsilon Engine\Helpers\MathHelper.cs" />
-    <Compile Include="Dont Melt Core\Epsilon Engine\Helpers\RandomnessHelper.cs" />
+    <Compile Include="Dont Melt Core\Epsilon Engine\Epsilon Engine Core\AssetLoader.cs" />
+    <Compile Include="Dont Melt Core\Epsilon Engine\Epsilon Engine Core\Component.cs" />
+    <Compile Include="Dont Melt Core\Epsilon Engine\Epsilon Engine Core\Data Types\Collision.cs" />
+    <Compile Include="Dont Melt Core\Epsilon Engine\Epsilon Engine Core\Data Types\Color.cs" />
+    <Compile Include="Dont Melt Core\Epsilon Engine\Epsilon Engine Core\Data Types\InitializationPacket.cs" />
+    <Compile Include="Dont Melt Core\Epsilon Engine\Epsilon Engine Core\Data Types\InputPacket.cs" />
+    <Compile Include="Dont Melt Core\Epsilon Engine\Epsilon Engine Core\Data Types\OutputPacket.cs" />
+    <Compile Include="Dont Melt Core\Epsilon Engine\Epsilon Engine Core\Data Types\Overlap.cs" />
+    <Compile Include="Dont Melt Core\Epsilon Engine\Epsilon Engine Core\Data Types\Point.cs" />
+    <Compile Include="Dont Melt Core\Epsilon Engine\Epsilon Engine Core\Data Types\Rectangle.cs" />
+    <Compile Include="Dont Melt Core\Epsilon Engine\Epsilon Engine Core\Data Types\SideInfo.cs" />
+    <Compile Include="Dont Melt Core\Epsilon Engine\Epsilon Engine Core\Data Types\Texture.cs" />
+    <Compile Include="Dont Melt Core\Epsilon Engine\Epsilon Engine Core\Data Types\UpdatePacket.cs" />
+    <Compile Include="Dont Melt Core\Epsilon Engine\Epsilon Engine Core\Data Types\Vector.cs" />
+    <Compile Include="Dont Melt Core\Epsilon Engine\Epsilon Engine Core\Embeded Components\Collider.cs" />
+    <Compile Include="Dont Melt Core\Epsilon Engine\Epsilon Engine Core\Embeded Components\Rigidbody.cs" />
+    <Compile Include="Dont Melt Core\Epsilon Engine\Epsilon Engine Core\EpsilonKernal.cs" />
+    <Compile Include="Dont Melt Core\Epsilon Engine\Epsilon Engine Core\GameObject.cs" />
+    <Compile Include="Dont Melt Core\Epsilon Engine\Epsilon Engine Core\Helpers\MathHelper.cs" />
+    <Compile Include="Dont Melt Core\Epsilon Engine\Epsilon Engine Core\Helpers\RandomnessHelper.cs" />
     <Compile Include="Dont Melt Core\Player.cs" />
     <Compile Include="MonoGameInterface.cs" />
-    <Compile Include="Dont Melt Core\Epsilon Engine\Data Types\Rectangle.cs" />
-    <Compile Include="Dont Melt Core\Epsilon Engine\Data Types\Color.cs" />
-    <Compile Include="Dont Melt Core\Epsilon Engine\Data Types\Texture.cs" />
-    <Compile Include="Dont Melt Core\Epsilon Engine\Data Types\Point.cs" />
     <Compile Include="Program.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -90,6 +91,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
@@ -97,6 +99,7 @@
     <None Include="app.manifest" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Dont Melt Core\Epsilon Engine\Modules\" />
     <Folder Include="Properties\" />
   </ItemGroup>
   <ItemGroup>

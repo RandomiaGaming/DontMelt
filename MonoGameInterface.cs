@@ -22,7 +22,7 @@ public class MonoGameInterface : Game
         Window.AllowUserResizing = true;
         IsMouseVisible = true;
         IsFixedTimeStep = false;
-        EngineKernal.Initialize();
+        EpsilonKernal.Initialize(InitializationPacket.Create());
         base.Initialize();
     }
     protected override void Update(GameTime gameTime)
@@ -35,7 +35,7 @@ public class MonoGameInterface : Game
         EpsilonEngine.Point mousePosition = EpsilonEngine.Point.Create((int)mouseX, (int)mouseY);
         InputPacket inputPacket = InputPacket.Create(GetPressedKeys(), mousePosition, 0);
         UpdatePacket Packet = UpdatePacket.Create(deltaTime, elapsedTime, inputPacket);
-        lastPacket = EngineKernal.Update(Packet);
+        lastPacket = EpsilonKernal.Update(Packet);
         if (lastPacket.requestExit)
         {
             Exit();
