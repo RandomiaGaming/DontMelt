@@ -1,14 +1,11 @@
 ﻿using System;
-namespace DontMelt
+public static class Program
 {
-    public static class Program
+    [STAThread]
+    static void Main()
     {
-        [STAThread]
-        static void Main()
-        {
-            MonoGameInterface game = new MonoGameInterface();
-            game.Run();
-            game.Dispose();
-        }
+        MonoGameInterface interfaceGame = new MonoGameInterface();
+        interfaceGame.Run();
+        interfaceGame.Dispose();
     }
 }

@@ -1,5 +1,5 @@
-bin/
-obj/
+DontMelt/bin/
+DontMelt/obj/
 .git/
 .vs/
 *.user

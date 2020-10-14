@@ -35,131 +35,130 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Icon.ico</ApplicationIcon>
+    <ApplicationIcon>
+    </ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Dont Melt Core\AssemblyInfo.cs" />
-    <Compile Include="Dont Melt Core\AssetLoader.cs" />
-    <Compile Include="Dont Melt Core\Component.cs" />
-    <Compile Include="Dont Melt Core\Data Types\Color.cs" />
-    <Compile Include="Dont Melt Core\Data Types\Packets\KeyboardInputPacket.cs" />
-    <Compile Include="Dont Melt Core\Data Types\Packets\MonitorDataPacket.cs" />
-    <Compile Include="Dont Melt Core\Data Types\Packets\MouseInputPacket.cs" />
-    <Compile Include="Dont Melt Core\Data Types\Packets\InitializationOutput.cs" />
-    <Compile Include="Dont Melt Core\Data Types\Packets\InitializationInput.cs" />
-    <Compile Include="Dont Melt Core\Data Types\Packets\UpdateOutput.cs" />
-    <Compile Include="Dont Melt Core\Data Types\Point.cs" />
-    <Compile Include="Dont Melt Core\Data Types\Rectangle.cs" />
-    <Compile Include="Dont Melt Core\Data Types\SideInfo.cs" />
-    <Compile Include="Dont Melt Core\Data Types\Texture.cs" />
-    <Compile Include="Dont Melt Core\Data Types\Packets\UpdateInput.cs" />
-    <Compile Include="Dont Melt Core\Data Types\Vector.cs" />
-    <Compile Include="Dont Melt Core\DefaultTimer.cs" />
-    <Compile Include="Dont Melt Core\DontMeltKernal.cs" />
-    <Compile Include="Dont Melt Core\GameObject.cs" />
-    <Compile Include="Dont Melt Core\Helpers\GradientHelper.cs" />
-    <Compile Include="Dont Melt Core\Helpers\MathHelper.cs" />
-    <Compile Include="Dont Melt Core\Helpers\RandomnessHelper.cs" />
-    <Compile Include="Dont Melt Core\Items\BounceBox\BounceBox.cs" />
-    <Compile Include="Dont Melt Core\Items\Button\Button.cs" />
-    <Compile Include="Dont Melt Core\Items\CheckPoint\CheckPoint.cs" />
-    <Compile Include="Dont Melt Core\Items\GhostBlock\GhostBlock.cs" />
-    <Compile Include="Dont Melt Core\Items\GoalGate\Goalgate.cs" />
-    <Compile Include="Dont Melt Core\Items\Ground\Ground.cs" />
-    <Compile Include="Dont Melt Core\Items\LavaBubble\LavaBubble.cs" />
-    <Compile Include="Dont Melt Core\Items\LavaCannon\LavaCannon.cs" />
-    <Compile Include="Dont Melt Core\Items\Lava\Lava.cs" />
-    <Compile Include="Dont Melt Core\Items\NoJump\NoJump.cs" />
-    <Compile Include="Dont Melt Core\Items\OneWayGates\OneWayGate.cs" />
-    <Compile Include="Dont Melt Core\Items\OnOffBlock\OnOffBlock.cs" />
-    <Compile Include="Dont Melt Core\Items\OnOffSpikes\OnOffSpike.cs" />
-    <Compile Include="Dont Melt Core\Items\PlayerCannon\PlayerCannon.cs" />
-    <Compile Include="Dont Melt Core\Items\Player\Player.cs" />
-    <Compile Include="Dont Melt Core\Items\Spiny\Spiny.cs" />
-    <Compile Include="Dont Melt Core\Items\Spring\Spring.cs" />
-    <Compile Include="Dont Melt Core\Items\Tether\Tether.cs" />
-    <Compile Include="Dont Melt Core\Items\Track\Track.cs" />
-    <Compile Include="Dont Melt Core\LevelInstantiateor.cs" />
-    <Compile Include="Dont Melt Core\Module Managment\ModuleHelper.cs" />
-    <Compile Include="Dont Melt Core\Physics\Collider.cs" />
-    <Compile Include="Dont Melt Core\Physics\Collision.cs" />
-    <Compile Include="Dont Melt Core\Physics\Overlap.cs" />
-    <Compile Include="Dont Melt Core\Physics\Rigidbody.cs" />
-    <Compile Include="Dont Melt Core\Save_Data_Manager.cs" />
-    <Compile Include="Dont Melt Core\StageEditor.cs" />
-    <Compile Include="Dont Melt Core\StageGenerator.cs" />
-    <Compile Include="Dont Melt Core\StagePlayer.cs" />
+    <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="Dont Melt Core\Epsilon Engine\Epsilon Engine Core\Helpers\AssetHelper.cs" />
+    <Compile Include="Dont Melt Core\Epsilon Engine\Epsilon Engine Core\Data Types\Color.cs" />
+    <Compile Include="Dont Melt Core\Epsilon Engine\Epsilon Engine Core\Data Types\Packets\KeyboardInputPacket.cs" />
+    <Compile Include="Dont Melt Core\Epsilon Engine\Epsilon Engine Core\Data Types\Packets\DisplayDataPacket.cs" />
+    <Compile Include="Dont Melt Core\Epsilon Engine\Epsilon Engine Core\Data Types\Packets\MouseInputPacket.cs" />
+    <Compile Include="Dont Melt Core\Epsilon Engine\Epsilon Engine Core\Data Types\Packets\InitializationOutputPacket.cs" />
+    <Compile Include="Dont Melt Core\Epsilon Engine\Epsilon Engine Core\Data Types\Packets\InitializationInputPacket.cs" />
+    <Compile Include="Dont Melt Core\Epsilon Engine\Epsilon Engine Core\Data Types\Packets\UpdateOutputPacket.cs" />
+    <Compile Include="Dont Melt Core\Epsilon Engine\Epsilon Engine Core\Data Types\Point.cs" />
+    <Compile Include="Dont Melt Core\Epsilon Engine\Epsilon Engine Core\Data Types\Rectangle.cs" />
+    <Compile Include="Dont Melt Core\Epsilon Engine\Epsilon Engine Core\Data Types\SideInfo.cs" />
+    <Compile Include="Dont Melt Core\Epsilon Engine\Epsilon Engine Core\Data Types\Texture.cs" />
+    <Compile Include="Dont Melt Core\Epsilon Engine\Epsilon Engine Core\Data Types\Packets\UpdateInputPacket.cs" />
+    <Compile Include="Dont Melt Core\Epsilon Engine\Epsilon Engine Core\Data Types\Vector.cs" />
+    <Compile Include="Dont Melt Core\Epsilon Engine\DefaultTimer.cs" />
+    <Compile Include="Dont Melt Core\Epsilon Engine\EpsilonKernal.cs" />
+    <Compile Include="Dont Melt Core\Epsilon Engine\Epsilon Engine Core\Helpers\GradientHelper.cs" />
+    <Compile Include="Dont Melt Core\Epsilon Engine\Epsilon Engine Core\Helpers\MathHelper.cs" />
+    <Compile Include="Dont Melt Core\Epsilon Engine\Epsilon Engine Core\Helpers\RandomnessHelper.cs" />
+    <Compile Include="Dont Melt Core\Components\BounceBox\BounceBox.cs" />
+    <Compile Include="Dont Melt Core\Components\Button\Button.cs" />
+    <Compile Include="Dont Melt Core\Components\CheckPoint\CheckPoint.cs" />
+    <Compile Include="Dont Melt Core\Components\GhostBlock\GhostBlock.cs" />
+    <Compile Include="Dont Melt Core\Components\GoalGate\Goalgate.cs" />
+    <Compile Include="Dont Melt Core\Components\Ground\Ground.cs" />
+    <Compile Include="Dont Melt Core\Components\LavaBubble\LavaBubble.cs" />
+    <Compile Include="Dont Melt Core\Components\LavaCannon\LavaCannon.cs" />
+    <Compile Include="Dont Melt Core\Components\Lava\Lava.cs" />
+    <Compile Include="Dont Melt Core\Components\NoJump\NoJump.cs" />
+    <Compile Include="Dont Melt Core\Components\OneWayGates\OneWayGate.cs" />
+    <Compile Include="Dont Melt Core\Components\OnOffBlock\OnOffBlock.cs" />
+    <Compile Include="Dont Melt Core\Components\OnOffSpikes\OnOffSpike.cs" />
+    <Compile Include="Dont Melt Core\Components\PlayerCannon\PlayerCannon.cs" />
+    <Compile Include="Dont Melt Core\Components\Player\Player.cs" />
+    <Compile Include="Dont Melt Core\Components\Spiny\Spiny.cs" />
+    <Compile Include="Dont Melt Core\Components\Spring\Spring.cs" />
+    <Compile Include="Dont Melt Core\Components\Tether\Tether.cs" />
+    <Compile Include="Dont Melt Core\Components\Track\Track.cs" />
+    <Compile Include="Dont Melt Core\Game Managers\LevelInstantiateor.cs" />
+    <Compile Include="Dont Melt Core\Epsilon Engine\Epsilon Engine Core\ModuleHelper.cs" />
+    <Compile Include="Dont Melt Core\Epsilon Engine\Default Modules\Physics\Collider.cs" />
+    <Compile Include="Dont Melt Core\Epsilon Engine\Default Modules\Physics\Collision.cs" />
+    <Compile Include="Dont Melt Core\Epsilon Engine\Default Modules\Physics\Overlap.cs" />
+    <Compile Include="Dont Melt Core\Epsilon Engine\Default Modules\Physics\Rigidbody.cs" />
+    <Compile Include="Dont Melt Core\Game Managers\Save_Data_Manager.cs" />
+    <Compile Include="Dont Melt Core\Game Managers\StageEditor.cs" />
+    <Compile Include="Dont Melt Core\Game Managers\StageGenerator.cs" />
+    <Compile Include="Dont Melt Core\Game Managers\StagePlayer.cs" />
     <Compile Include="MonoGameInterface.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">
       <HintPath>$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\Windows\MonoGame.Framework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Xml" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Dont Melt Core\Dont Melt Icon.ico" />
-    <Content Include="Dont Melt Core\Items\BounceBox\BounceBox.png" />
-    <Content Include="Dont Melt Core\Items\Button\Button.png" />
-    <Content Include="Dont Melt Core\Items\CheckPoint\CheckPoint.png" />
-    <Content Include="Dont Melt Core\Items\GhostBlock\GhostBlock.png" />
-    <Content Include="Dont Melt Core\Items\GoalGate\GoalGate.png" />
-    <Content Include="Dont Melt Core\Items\Ground\Ground.png" />
-    <Content Include="Dont Melt Core\Items\LavaBubble\LavaBubble.png" />
-    <Content Include="Dont Melt Core\Items\LavaCannon\LavaCannon.png" />
-    <Content Include="Dont Melt Core\Items\Lava\Lava.png" />
-    <Content Include="Dont Melt Core\Items\NoJump\NoJump.png" />
-    <Content Include="Dont Melt Core\Items\OneWayGates\OneWayGate %283%29.png" />
-    <Content Include="Dont Melt Core\Items\OnOffBlock\OnOffBlock.png" />
-    <Content Include="Dont Melt Core\Items\OnOffSpikes\OnOffSpike.png" />
-    <Content Include="Dont Melt Core\Items\PlayerCannon\PlayerCannon.png" />
-    <Content Include="Dont Melt Core\Items\Player\Player.png" />
-    <Content Include="Dont Melt Core\Items\Spiny\Spiny.png" />
-    <Content Include="Dont Melt Core\Items\Spring\Spring.png" />
-    <Content Include="Dont Melt Core\Items\Tether\Tether.png" />
-    <Content Include="Dont Melt Core\Items\Track\Track.png" />
-    <Content Include="Dont Melt Core\Music\Don%27t Melt - Rain Drops!.mp3" />
-    <Content Include="Dont Melt Core\Music\Don%27t Melt! - Beach!.mp3" />
-    <Content Include="Dont Melt Core\Music\Don%27t Melt! - Calm!.mp3" />
-    <Content Include="Dont Melt Core\Music\Don%27t Melt! - Dubstep!.mp3" />
-    <Content Include="Dont Melt Core\Music\Don%27t Melt! - Expert!.mp3" />
-    <Content Include="Dont Melt Core\Music\Don%27t Melt! - Funky!.mp3" />
-    <Content Include="Dont Melt Core\Music\Don%27t Melt! - Hard!.mp3" />
-    <Content Include="Dont Melt Core\Music\Don%27t Melt! - Mythic!.mp3" />
-    <Content Include="Dont Melt Core\Music\Don%27t Melt! - Normal!.mp3" />
-    <Content Include="Dont Melt Core\Music\Don%27t Melt! - Peaceful!.mp3" />
-    <Content Include="Dont Melt Core\UI Sprites\All.png" />
-    <Content Include="Dont Melt Core\UI Sprites\Arrow.png" />
-    <Content Include="Dont Melt Core\UI Sprites\Back.png" />
-    <Content Include="Dont Melt Core\UI Sprites\Brush.png" />
-    <Content Include="Dont Melt Core\UI Sprites\Bucket.png" />
-    <Content Include="Dont Melt Core\UI Sprites\Button.png" />
-    <Content Include="Dont Melt Core\UI Sprites\Dot.png" />
-    <Content Include="Dont Melt Core\UI Sprites\Eraser.png" />
-    <Content Include="Dont Melt Core\UI Sprites\menuicon.png" />
-    <Content Include="Dont Melt Core\UI Sprites\MoreItems.png" />
-    <Content Include="Dont Melt Core\UI Sprites\PauseButton.png" />
-    <Content Include="Dont Melt Core\UI Sprites\Play.png" />
-    <Content Include="Dont Melt Core\UI Sprites\Reset.png" />
-    <Content Include="Dont Melt Core\UI Sprites\Selection.png" />
-    <Content Include="Dont Melt Core\UI Sprites\SettingsGear.png" />
-    <Content Include="Dont Melt Core\UI Sprites\ToggleValue.png" />
-    <Content Include="Dont Melt Core\UI Sprites\Undo.png" />
-    <Content Include="Dont Melt Core\UI Sprites\White Square.png" />
-    <Content Include="Dont Melt Core\UI Sprites\WorldArrow.png" />
     <Content Include="Icon.ico" />
+    <Content Include="Dont Melt Core\Components\BounceBox\BounceBox.png" />
+    <Content Include="Dont Melt Core\Components\Button\Button.png" />
+    <Content Include="Dont Melt Core\Components\CheckPoint\CheckPoint.png" />
+    <Content Include="Dont Melt Core\Components\GhostBlock\GhostBlock.png" />
+    <Content Include="Dont Melt Core\Components\GoalGate\GoalGate.png" />
+    <Content Include="Dont Melt Core\Components\Ground\Ground.png" />
+    <Content Include="Dont Melt Core\Components\LavaBubble\LavaBubble.png" />
+    <Content Include="Dont Melt Core\Components\LavaCannon\LavaCannon.png" />
+    <Content Include="Dont Melt Core\Components\Lava\Lava.png" />
+    <Content Include="Dont Melt Core\Components\NoJump\NoJump.png" />
+    <Content Include="Dont Melt Core\Components\OneWayGates\OneWayGate.png" />
+    <Content Include="Dont Melt Core\Components\OnOffBlock\OnOffBlock.png" />
+    <Content Include="Dont Melt Core\Components\OnOffSpikes\OnOffSpike.png" />
+    <Content Include="Dont Melt Core\Components\PlayerCannon\PlayerCannon.png" />
+    <Content Include="Dont Melt Core\Components\Player\Player.png" />
+    <Content Include="Dont Melt Core\Components\Spiny\Spiny.png" />
+    <Content Include="Dont Melt Core\Components\Spring\Spring.png" />
+    <Content Include="Dont Melt Core\Components\Tether\Tether.png" />
+    <Content Include="Dont Melt Core\Components\Track\Track.png" />
+    <EmbeddedResource Include="Dont Melt Core\Sounds\Don%27t Melt - Rain Drops!.mp3" />
+    <EmbeddedResource Include="Dont Melt Core\Sounds\Don%27t Melt! - Beach!.mp3" />
+    <EmbeddedResource Include="Dont Melt Core\Sounds\Don%27t Melt! - Calm!.mp3" />
+    <EmbeddedResource Include="Dont Melt Core\Sounds\Don%27t Melt! - Dubstep!.mp3" />
+    <EmbeddedResource Include="Dont Melt Core\Sounds\Don%27t Melt! - Expert!.mp3" />
+    <EmbeddedResource Include="Dont Melt Core\Sounds\Don%27t Melt! - Funky!.mp3" />
+    <EmbeddedResource Include="Dont Melt Core\Sounds\Don%27t Melt! - Hard!.mp3" />
+    <EmbeddedResource Include="Dont Melt Core\Sounds\Don%27t Melt! - Mythic!.mp3" />
+    <EmbeddedResource Include="Dont Melt Core\Sounds\Don%27t Melt! - Normal!.mp3" />
+    <EmbeddedResource Include="Dont Melt Core\Sounds\Don%27t Melt! - Peaceful!.mp3" />
+    <Content Include="Dont Melt Core\Textures\All.png" />
+    <Content Include="Dont Melt Core\Textures\Arrow.png" />
+    <Content Include="Dont Melt Core\Textures\Back.png" />
+    <Content Include="Dont Melt Core\Textures\Brush.png" />
+    <Content Include="Dont Melt Core\Textures\Bucket.png" />
+    <Content Include="Dont Melt Core\Textures\Button.png" />
+    <Content Include="Dont Melt Core\Textures\Dot.png" />
+    <Content Include="Dont Melt Core\Textures\Eraser.png" />
+    <Content Include="Dont Melt Core\Textures\menuicon.png" />
+    <Content Include="Dont Melt Core\Textures\MoreItems.png" />
+    <Content Include="Dont Melt Core\Textures\PauseButton.png" />
+    <Content Include="Dont Melt Core\Textures\Play.png" />
+    <Content Include="Dont Melt Core\Textures\Reset.png" />
+    <Content Include="Dont Melt Core\Textures\Selection.png" />
+    <Content Include="Dont Melt Core\Textures\SettingsGear.png" />
+    <Content Include="Dont Melt Core\Textures\ToggleValue.png" />
+    <Content Include="Dont Melt Core\Textures\Undo.png" />
+    <Content Include="Dont Melt Core\Textures\White Square.png" />
+    <Content Include="Dont Melt Core\Textures\WorldArrow.png" />
   </ItemGroup>
   <ItemGroup>
-    <MonoGameContentReference Include="Assets\Assets.mgcb" />
     <None Include="app.manifest" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
