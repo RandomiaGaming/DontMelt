@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{89211E05-4438-474B-9AC9-55BAAF780918}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DontMelt</RootNamespace>
+    <AssemblyName>DontMelt</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MonoGamePlatform>Windows</MonoGamePlatform>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\$(MonoGamePlatform)\$(Platform)\$(Configuration)\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;WINDOWS</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <CodeAnalysisRuleSet />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\$(MonoGamePlatform)\$(Platform)\$(Configuration)\</OutputPath>
+    <DefineConstants>TRACE;WINDOWS</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <CodeAnalysisRuleSet />
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>
+    </ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="Dont Melt Core\Epsilon Engine\DefaultTimer.cs" />
+    <Compile Include="Dont Melt Core\Epsilon Engine\Physics\Collider.cs" />
+    <Compile Include="Dont Melt Core\Epsilon Engine\Physics\Collision.cs" />
+    <Compile Include="Dont Melt Core\Epsilon Engine\Physics\Overlap.cs" />
+    <Compile Include="Dont Melt Core\Epsilon Engine\Physics\Rigidbody.cs" />
+    <Compile Include="Dont Melt Core\Epsilon Engine\Asset Loading\AssetLoader.cs" />
+    <Compile Include="Dont Melt Core\Epsilon Engine\Component.cs" />
+    <Compile Include="Dont Melt Core\Epsilon Engine\Data Types\AudioClip.cs" />
+    <Compile Include="Dont Melt Core\Epsilon Engine\Data Types\Color.cs" />
+    <Compile Include="Dont Melt Core\Epsilon Engine\Data Types\Packets\KeyboardPacket.cs" />
+    <Compile Include="Dont Melt Core\Epsilon Engine\Data Types\Packets\MousePacket.cs" />
+    <Compile Include="Dont Melt Core\Epsilon Engine\Data Types\Packets\InitializationInputPacket.cs" />
+    <Compile Include="Dont Melt Core\Epsilon Engine\Data Types\Packets\UpdateOutputPacket.cs" />
+    <Compile Include="Dont Melt Core\Epsilon Engine\Data Types\Point.cs" />
+    <Compile Include="Dont Melt Core\Epsilon Engine\Data Types\Rectangle.cs" />
+    <Compile Include="Dont Melt Core\Epsilon Engine\Data Types\SideInfo.cs" />
+    <Compile Include="Dont Melt Core\Epsilon Engine\Data Types\Texture.cs" />
+    <Compile Include="Dont Melt Core\Epsilon Engine\Data Types\Packets\UpdateInputPacket.cs" />
+    <Compile Include="Dont Melt Core\Epsilon Engine\Data Types\Vector.cs" />
+    <Compile Include="Dont Melt Core\Epsilon Engine\EpsilonKernal.cs" />
+    <Compile Include="Dont Melt Core\Epsilon Engine\GameObject.cs" />
+    <Compile Include="Dont Melt Core\Epsilon Engine\Helpers\GradientHelper.cs" />
+    <Compile Include="Dont Melt Core\Epsilon Engine\Helpers\MathHelper.cs" />
+    <Compile Include="Dont Melt Core\Epsilon Engine\Helpers\RandomnessHelper.cs" />
+    <Compile Include="MonoGameInterface.cs" />
+    <Compile Include="Program.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="MonoGame.Framework">
+      <HintPath>$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\Windows\MonoGame.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Drawing" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Dont Melt Core\Textures\Item Textures\BounceBox.png" />
+    <EmbeddedResource Include="Dont Melt Core\Textures\Item Textures\CheckPoint.png" />
+    <EmbeddedResource Include="Dont Melt Core\Textures\Item Textures\GhostBlock.png" />
+    <EmbeddedResource Include="Dont Melt Core\Textures\Item Textures\GoalGate.png" />
+    <EmbeddedResource Include="Dont Melt Core\Textures\Item Textures\Ground.png" />
+    <EmbeddedResource Include="Dont Melt Core\Textures\Item Textures\Lava.png" />
+    <EmbeddedResource Include="Dont Melt Core\Textures\Item Textures\LavaBubble.png" />
+    <EmbeddedResource Include="Dont Melt Core\Textures\Item Textures\LavaCannon.png" />
+    <EmbeddedResource Include="Dont Melt Core\Textures\Item Textures\NoJump.png" />
+    <EmbeddedResource Include="Dont Melt Core\Textures\Item Textures\OneWayGate.png" />
+    <EmbeddedResource Include="Dont Melt Core\Textures\Item Textures\OnOffBlock.png" />
+    <EmbeddedResource Include="Dont Melt Core\Textures\Item Textures\OnOffSpike.png" />
+    <EmbeddedResource Include="Dont Melt Core\Textures\Item Textures\Player.png" />
+    <EmbeddedResource Include="Dont Melt Core\Textures\Item Textures\PlayerCannon.png" />
+    <EmbeddedResource Include="Dont Melt Core\Textures\Item Textures\Spiny.png" />
+    <EmbeddedResource Include="Dont Melt Core\Textures\Item Textures\Spring.png" />
+    <EmbeddedResource Include="Dont Melt Core\Textures\Item Textures\Switch.png" />
+    <EmbeddedResource Include="Dont Melt Core\Textures\Item Textures\Tether.png" />
+    <EmbeddedResource Include="Dont Melt Core\Textures\Item Textures\Track.png" />
+    <EmbeddedResource Include="Dont Melt Core\Textures\UI Textures\All.png" />
+    <EmbeddedResource Include="Dont Melt Core\Textures\UI Textures\Arrow.png" />
+    <EmbeddedResource Include="Dont Melt Core\Textures\UI Textures\Back.png" />
+    <EmbeddedResource Include="Dont Melt Core\Textures\UI Textures\Brush.png" />
+    <EmbeddedResource Include="Dont Melt Core\Textures\UI Textures\Bucket.png" />
+    <EmbeddedResource Include="Dont Melt Core\Textures\UI Textures\Button.png" />
+    <EmbeddedResource Include="Dont Melt Core\Textures\UI Textures\Dot.png" />
+    <EmbeddedResource Include="Dont Melt Core\Textures\UI Textures\Eraser.png" />
+    <EmbeddedResource Include="Dont Melt Core\Textures\UI Textures\menuicon.png" />
+    <EmbeddedResource Include="Dont Melt Core\Textures\UI Textures\MoreItems.png" />
+    <EmbeddedResource Include="Dont Melt Core\Textures\UI Textures\PauseButton.png" />
+    <EmbeddedResource Include="Dont Melt Core\Textures\UI Textures\Play.png" />
+    <EmbeddedResource Include="Dont Melt Core\Textures\UI Textures\Reset.png" />
+    <EmbeddedResource Include="Dont Melt Core\Textures\UI Textures\Selection.png" />
+    <EmbeddedResource Include="Dont Melt Core\Textures\UI Textures\SettingsGear.png" />
+    <EmbeddedResource Include="Dont Melt Core\Textures\UI Textures\ToggleValue.png" />
+    <EmbeddedResource Include="Dont Melt Core\Textures\UI Textures\Undo.png" />
+    <EmbeddedResource Include="Dont Melt Core\Textures\UI Textures\White Square.png" />
+    <EmbeddedResource Include="Dont Melt Core\Textures\UI Textures\WorldArrow.png" />
+    <Content Include="Icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.manifest" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
