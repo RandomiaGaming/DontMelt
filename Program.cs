@@ -1,12 +1,15 @@
 ﻿using System;
-using System.Threading;
-
 public static class Program
 {
     [STAThread]
-    public static void Main()
+    public static void Main(string[] args)
     {
-        MonoGameInterface interfaceGame = new MonoGameInterface();
+        bool debug = false;
+        if (args.Length == 1 && args[0].ToLower() == "debug")
+        {
+            debug = true;
+        }
+        MonoGameInterface interfaceGame = new MonoGameInterface(debug);
         interfaceGame.Run();
         interfaceGame.Dispose();
     }

@@ -1,44 +1,79 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Audio;
+﻿//UNSAFE
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
-
-public class MonoGameInterface : Game
+using System.Collections.Generic;
+public sealed class MonoGameInterface : Game
 {
-    public GraphicsDeviceManager graphics;
-    public Random RNG = new Random();
-    public SoundEffect soundBuffer = null;
-    public Texture2D frameBuffer = null;
-    public MonoGameInterface()
+    private bool debug = false;
+    private Epsilon.ReturnPacket rPacketBuffer = null;
+    public MonoGameInterface(bool debug)
     {
-        graphics = new GraphicsDeviceManager(this);
-        graphics.SynchronizeWithVerticalRetrace = false;
+        new GraphicsDeviceManager(this);
+        Window.AllowUserResizing = true;
+        Window.AllowAltF4 = true;
+        Window.IsBorderless = false;
+        Window.Title = "Epsilon - RandomiaGaming";
         IsMouseVisible = true;
+        this.debug = debug;
     }
-    protected override void Initialize()
+    protected sealed override void Initialize()
     {
+        Epsilon.InitializationPacket iPacket = new Epsilon.InitializationPacket(debug);
+        Epsilon.EpsilonKernal.Initialize(iPacket);
         base.Initialize();
     }
-    protected override void Update(GameTime gameTime)
+    protected sealed override void Update(GameTime gameTime)
     {
-        EpsilonEngine.UpdateInputPacket inputPacket = new EpsilonEngine.UpdateInputPacket();
-        inputPacket.deltaTime = gameTime.ElapsedGameTime;
-        inputPacket.elapsedTime = gameTime.TotalGameTime;
-        EpsilonEngine.UpdateOutputPacket outputPacket = EpsilonEngine.EpsilonKernal.Update(inputPacket);
-        GraphicsDevice.Clear(Color.Black);
-        SpriteBatch spriteBatch = new SpriteBatch(GraphicsDevice);
-        spriteBatch.Begin(samplerState: SamplerState.PointClamp);
-        Texture2D frame = new Texture2D(GraphicsDevice, outputPacket.frame.width, outputPacket.frame.height);
-        Color[] data = new Color[outputPacket.frame.width * outputPacket.frame.height];
-        EpsilonEngine.Color[] eData = outputPacket.frame.GetData();
-        for (int i = 0; i < outputPacket.frame.width * outputPacket.frame.height; i++)
+        List<Epsilon.Key> dmPressedKeys = new List<Epsilon.Key>();
+        Keys[] pressedKeys = Keyboard.GetState().GetPressedKeys();
+        foreach (Keys key in pressedKeys)
         {
-            data[i] = new Color(eData[i].r, eData[i].g, eData[i].b);
+            switch (key)
+            {
+                case Keys.A:
+                    dmPressedKeys.Add(Epsilon.Key.A);
+                    break;
+                case Keys.B:
+                    dmPressedKeys.Add(Epsilon.Key.B);
+                    break;
+            }
         }
-        frame.SetData(data);
-        spriteBatch.Draw(frame, new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height), Color.White);
-        spriteBatch.End();
+        Epsilon.UpdatePacket updatePacket = new Epsilon.UpdatePacket(dmPressedKeys.ToArray());
+        rPacketBuffer = Epsilon.EpsilonKernal.Update(updatePacket);
+        if (rPacketBuffer.requestQuit)
+        {
+            Exit();
+        }
         base.Update(gameTime);
+    }
+    protected sealed override void Draw(GameTime gameTime)
+    {
+        GraphicsDevice.Clear(Color.Black);
+        if (rPacketBuffer != null)
+        {
+            //Convert the frame to a Texture2D which MonoGame can read.
+            Texture2D frame = new Texture2D(GraphicsDevice, rPacketBuffer.frame.width, rPacketBuffer.frame.height);
+            Color[] data = new Color[rPacketBuffer.frame.width * rPacketBuffer.frame.height];
+            int i = 0;
+            for (int y = 0; y < rPacketBuffer.frame.height; y++)
+            {
+                for (int x = 0; x < rPacketBuffer.frame.width; x++)
+                {
+                    Epsilon.Color pixelColor = rPacketBuffer.frame.GetPixelUnsafe(x, rPacketBuffer.frame.height - y - 1);
+                    data[i] = new Color(pixelColor.r, pixelColor.g, pixelColor.b);
+                    i++;
+                }
+            }
+            frame.SetData(data);
+            //Render the frame in MonoGame.
+            SpriteBatch spriteBatch = new SpriteBatch(GraphicsDevice);
+            spriteBatch.Begin(samplerState: SamplerState.PointClamp);
+            spriteBatch.Draw(frame, new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height), Color.White);
+            spriteBatch.End();
+        }
+        //Draw the base.
+        base.Draw(gameTime);
     }
 }
