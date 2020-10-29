@@ -1,10 +1,9 @@
 ﻿using System.Reflection;
-using System.Runtime.InteropServices;
-[assembly: AssemblyTitle("Epsilon")]
-[assembly: AssemblyProduct("Epsilon")]
-[assembly: AssemblyDescription("Epsilon - Version 1.0")]
+[assembly: AssemblyTitle("DontMelt 1.0")]
+[assembly: AssemblyProduct("DontMelt 1.0")]
+[assembly: AssemblyDescription("DontMelt 1.0")]
 [assembly: AssemblyCompany("RandomiaGaming")]
-[assembly: AssemblyCopyright("Copyright © 2020")]
-[assembly: Guid("1e5c7f48-e292-4083-a0f1-1dde48e60049")]
+[assembly: AssemblyCopyright("Copyright RandomiaGaming 2020")]
+[assembly: AssemblyTrademark("Trademark RandomiaGaming 2020")]
 [assembly: AssemblyVersion("1.0")]
 [assembly: AssemblyFileVersion("1.0")]

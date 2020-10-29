@@ -1,48 +1,60 @@
-﻿//UNSAFE
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 public sealed class MonoGameInterface : Game
 {
-    private bool debug = false;
-    private Epsilon.ReturnPacket rPacketBuffer = null;
-    public MonoGameInterface(bool debug)
+    private readonly string[] args = null;
+    private EpsilonEngine.ReturnPacket packetBuffer = null;
+    private readonly EpsilonEngine.Game epsilonGame = new EpsilonEngine.Game();
+    public MonoGameInterface(string[] args)
     {
-        new GraphicsDeviceManager(this);
+        GraphicsDeviceManager graphics = new GraphicsDeviceManager(this)
+        {
+            SynchronizeWithVerticalRetrace = false
+        };
         Window.AllowUserResizing = true;
         Window.AllowAltF4 = true;
         Window.IsBorderless = false;
-        Window.Title = "Epsilon - RandomiaGaming";
+        Window.Title = "Dont Melt - RandomiaGaming";
         IsMouseVisible = true;
-        this.debug = debug;
+        IsFixedTimeStep = false;
+        this.args = args;
+        epsilonGame = new EpsilonEngine.Game();
     }
     protected sealed override void Initialize()
     {
-        Epsilon.InitializationPacket iPacket = new Epsilon.InitializationPacket(debug);
-        Epsilon.EpsilonKernal.Initialize(iPacket);
+        EpsilonEngine.InitializationPacket packet = new EpsilonEngine.InitializationPacket
+        {
+            args = args,
+            platform = EpsilonEngine.Platform.Windows
+        };
+        epsilonGame.Initialize(packet);
         base.Initialize();
     }
     protected sealed override void Update(GameTime gameTime)
     {
-        List<Epsilon.Key> dmPressedKeys = new List<Epsilon.Key>();
+        List<EpsilonEngine.Key> dmPressedKeys = new List<EpsilonEngine.Key>();
         Keys[] pressedKeys = Keyboard.GetState().GetPressedKeys();
         foreach (Keys key in pressedKeys)
         {
             switch (key)
             {
                 case Keys.A:
-                    dmPressedKeys.Add(Epsilon.Key.A);
+                    dmPressedKeys.Add(EpsilonEngine.Key.A);
                     break;
                 case Keys.B:
-                    dmPressedKeys.Add(Epsilon.Key.B);
+                    dmPressedKeys.Add(EpsilonEngine.Key.B);
                     break;
             }
         }
-        Epsilon.UpdatePacket updatePacket = new Epsilon.UpdatePacket(dmPressedKeys.ToArray());
-        rPacketBuffer = Epsilon.EpsilonKernal.Update(updatePacket);
-        if (rPacketBuffer.requestQuit)
+        EpsilonEngine.UpdatePacket packet = new EpsilonEngine.UpdatePacket
+        {
+            pressedKeys = dmPressedKeys
+        };
+        packetBuffer = epsilonGame.Update(packet);
+        if (packetBuffer.requestQuit)
         {
             Exit();
         }
@@ -51,17 +63,17 @@ public sealed class MonoGameInterface : Game
     protected sealed override void Draw(GameTime gameTime)
     {
         GraphicsDevice.Clear(Color.Black);
-        if (rPacketBuffer != null)
+        if (packetBuffer != null)
         {
-            //Convert the frame to a Texture2D which MonoGame can read.
-            Texture2D frame = new Texture2D(GraphicsDevice, rPacketBuffer.frame.width, rPacketBuffer.frame.height);
-            Color[] data = new Color[rPacketBuffer.frame.width * rPacketBuffer.frame.height];
+            //Convert the frameTexture to a Texture2D which MonoGame can read.
+            Texture2D frame = new Texture2D(GraphicsDevice, packetBuffer.frameTexture.width, packetBuffer.frameTexture.height);
+            Color[] data = new Color[packetBuffer.frameTexture.width * packetBuffer.frameTexture.height];
             int i = 0;
-            for (int y = 0; y < rPacketBuffer.frame.height; y++)
+            for (int y = 0; y < packetBuffer.frameTexture.height; y++)
             {
-                for (int x = 0; x < rPacketBuffer.frame.width; x++)
+                for (int x = 0; x < packetBuffer.frameTexture.width; x++)
                 {
-                    Epsilon.Color pixelColor = rPacketBuffer.frame.GetPixelUnsafe(x, rPacketBuffer.frame.height - y - 1);
+                    EpsilonEngine.Color pixelColor = packetBuffer.frameTexture.GetPixelUnsafe((ushort)x, (ushort)(packetBuffer.frameTexture.height - y - 1));
                     data[i] = new Color(pixelColor.r, pixelColor.g, pixelColor.b);
                     i++;
                 }
