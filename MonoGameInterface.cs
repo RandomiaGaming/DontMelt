@@ -1,14 +1,17 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Epsilon;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+
 public sealed class MonoGameInterface : Game
 {
-    private readonly string[] args = null;
+    private int lastScrollWheelValue = 0;
     private EpsilonEngine.ReturnPacket packetBuffer = null;
-    private readonly EpsilonEngine.Game epsilonGame = new EpsilonEngine.Game();
-    public MonoGameInterface(string[] args)
+    private readonly EpsilonEngine.Game epsilonGame = null;
+    public MonoGameInterface(bool debugMode)
     {
         GraphicsDeviceManager graphics = new GraphicsDeviceManager(this)
         {
@@ -19,45 +22,47 @@ public sealed class MonoGameInterface : Game
         Window.IsBorderless = false;
         Window.Title = "Dont Melt - RandomiaGaming";
         IsMouseVisible = true;
-        IsFixedTimeStep = false;
-        this.args = args;
-        epsilonGame = new EpsilonEngine.Game();
+        IsFixedTimeStep = true;
+        TargetElapsedTime = new TimeSpan(10000000 / 60);
+        epsilonGame = new EpsilonGame(debugMode);
     }
     protected sealed override void Initialize()
     {
-        EpsilonEngine.InitializationPacket packet = new EpsilonEngine.InitializationPacket
-        {
-            args = args,
-            platform = EpsilonEngine.Platform.Windows
-        };
-        epsilonGame.Initialize(packet);
+        epsilonGame.Initialize();
         base.Initialize();
     }
     protected sealed override void Update(GameTime gameTime)
     {
-        List<EpsilonEngine.Key> dmPressedKeys = new List<EpsilonEngine.Key>();
-        Keys[] pressedKeys = Keyboard.GetState().GetPressedKeys();
-        foreach (Keys key in pressedKeys)
+        List<EpsilonEngine.KeyCode> pressedKeys = new List<EpsilonEngine.KeyCode>();
+        foreach (Keys key in Keyboard.GetState().GetPressedKeys())
         {
             switch (key)
             {
                 case Keys.A:
-                    dmPressedKeys.Add(EpsilonEngine.Key.A);
+                    pressedKeys.Add(EpsilonEngine.KeyCode.A);
                     break;
-                case Keys.B:
-                    dmPressedKeys.Add(EpsilonEngine.Key.B);
+                case Keys.D:
+                    pressedKeys.Add(EpsilonEngine.KeyCode.D);
+                    break;
+                case Keys.Space:
+                    pressedKeys.Add(EpsilonEngine.KeyCode.Space);
                     break;
             }
         }
         EpsilonEngine.UpdatePacket packet = new EpsilonEngine.UpdatePacket
         {
-            pressedKeys = dmPressedKeys
+            pressedKeys = pressedKeys,
+            capsLock = Keyboard.GetState().CapsLock,
+            numLock = Keyboard.GetState().NumLock,
+            mousePosition = new EpsilonEngine.Point(Mouse.GetState().X, GraphicsDevice.Viewport.Height - Mouse.GetState().Y),
+            scrollWheelDelta = (Mouse.GetState().ScrollWheelValue / 120) - lastScrollWheelValue,
         };
         packetBuffer = epsilonGame.Update(packet);
         if (packetBuffer.requestQuit)
         {
             Exit();
         }
+        lastScrollWheelValue = Mouse.GetState().ScrollWheelValue / 120;
         base.Update(gameTime);
     }
     protected sealed override void Draw(GameTime gameTime)
@@ -65,7 +70,6 @@ public sealed class MonoGameInterface : Game
         GraphicsDevice.Clear(Color.Black);
         if (packetBuffer != null)
         {
-            //Convert the frameTexture to a Texture2D which MonoGame can read.
             Texture2D frame = new Texture2D(GraphicsDevice, packetBuffer.frameTexture.width, packetBuffer.frameTexture.height);
             Color[] data = new Color[packetBuffer.frameTexture.width * packetBuffer.frameTexture.height];
             int i = 0;
@@ -79,13 +83,11 @@ public sealed class MonoGameInterface : Game
                 }
             }
             frame.SetData(data);
-            //Render the frame in MonoGame.
             SpriteBatch spriteBatch = new SpriteBatch(GraphicsDevice);
             spriteBatch.Begin(samplerState: SamplerState.PointClamp);
             spriteBatch.Draw(frame, new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height), Color.White);
             spriteBatch.End();
         }
-        //Draw the base.
         base.Draw(gameTime);
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
-[assembly: AssemblyTitle("DontMelt 1.0")]
-[assembly: AssemblyProduct("DontMelt 1.0")]
-[assembly: AssemblyDescription("DontMelt 1.0")]
+[assembly: AssemblyTitle("Epsilon 1.0")]
+[assembly: AssemblyProduct("Epsilon 1.0")]
+[assembly: AssemblyDescription("Epsilon 1.0")]
 [assembly: AssemblyCompany("RandomiaGaming")]
 [assembly: AssemblyCopyright("Copyright RandomiaGaming 2020")]
 [assembly: AssemblyTrademark("Trademark RandomiaGaming 2020")]
