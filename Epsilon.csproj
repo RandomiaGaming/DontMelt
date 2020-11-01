@@ -65,9 +65,11 @@
   <PropertyGroup />
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
-    <Compile Include="Epsilon Engine\Base Classes\InputManager.cs" />
-    <Compile Include="Epsilon Engine\Data Classes\Packets\Input\InputPacket.cs" />
-    <Compile Include="Epsilon Engine\Data Classes\Packets\Input\KeyCode.cs" />
+    <Compile Include="Drivers\MonoGame Windows\MGWGraphicsDriver.cs" />
+    <Compile Include="Drivers\MonoGame Windows\MGWInputDriver.cs" />
+    <Compile Include="Epsilon Engine\Driver Bases\GraphicsDriver.cs" />
+    <Compile Include="Epsilon Engine\Driver Bases\InputDriver.cs" />
+    <Compile Include="Epsilon Engine\Data Classes\Basic Types\KeyCode.cs" />
     <Compile Include="Epsilon\EpsilonGame.cs" />
     <Compile Include="Epsilon\Components\Player.cs" />
     <Compile Include="Epsilon Engine\Base Classes\GameManager.cs" />
@@ -87,7 +89,6 @@
     <Compile Include="Epsilon Engine\Data Classes\Basic Types\Texture.cs" />
     <Compile Include="Epsilon Engine\Data Classes\Basic Types\Vector.cs" />
     <Compile Include="Epsilon Engine\Data Classes\Packets\ReturnPacket.cs" />
-    <Compile Include="Epsilon Engine\Data Classes\Packets\UpdatePacket.cs" />
     <Compile Include="Epsilon Engine\Embeded Components\Collider.cs" />
     <Compile Include="Epsilon Engine\Embeded Components\Rigidbody.cs" />
     <Compile Include="Epsilon Engine\Helper Classes\AssetHelper.cs" />
@@ -99,7 +100,7 @@
     <Compile Include="Epsilon Engine\Data Classes\Basic Types\Collision.cs" />
     <Compile Include="Epsilon Engine\Data Classes\Basic Types\Overlap.cs" />
     <Compile Include="Epsilon Engine\Helper Classes\TASHelper.cs" />
-    <Compile Include="MonoGameInterface.cs" />
+    <Compile Include="Drivers\MonoGame Windows\MGWInterfaceGame.cs" />
     <Compile Include="Program.cs" />
   </ItemGroup>
   <ItemGroup>
