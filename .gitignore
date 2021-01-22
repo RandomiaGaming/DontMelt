@@ -1,6 +1,7 @@
-DontMelt/bin/
-DontMelt/obj/
+EpsilonEngine/bin/
+EpsilonEngine/obj/
 .git/
 .vs/
 *.user
 *.suo
+packages/
