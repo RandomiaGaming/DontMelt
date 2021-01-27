@@ -31,40 +31,47 @@ namespace DontMelt
 
             if (stageData is not null)
             {
-                foreach (TileData tileData in stageData.data)
+                foreach (TileData tileData in stageData.tilemapData)
                 {
                     StageItem newItem = null;
-                    if (tileData.itemName.ToLower() == "player")
+                    if (tileData.stageItem == "Player")
                     {
                         newItem = new Player(this)
                         {
                             position = new Point(tileData.position.x * 16, tileData.position.y * 16),
                         };
                     }
-                    else if (tileData.itemName.ToLower() == "ground")
+                    else if (tileData.stageItem == "Ground")
                     {
                         newItem = new Ground(this)
                         {
                             position = new Point(tileData.position.x * 16, tileData.position.y * 16),
                         };
                     }
-                    else if (tileData.itemName.ToLower() == "lava")
+                    else if (tileData.stageItem == "Lava")
                     {
                         newItem = new Lava(this)
                         {
                             position = new Point(tileData.position.x * 16, tileData.position.y * 16),
                         };
                     }
-                    else if (tileData.itemName.ToLower() == "nojump")
+                    else if (tileData.stageItem == "NoJump")
                     {
                         newItem = new NoJump(this)
                         {
                             position = new Point(tileData.position.x * 16, tileData.position.y * 16),
                         };
                     }
-                    else if (tileData.itemName.ToLower() == "spring")
+                    else if (tileData.stageItem == "Spring")
                     {
                         newItem = new Spring(this)
+                        {
+                            position = new Point(tileData.position.x * 16, tileData.position.y * 16),
+                        };
+                    }
+                    else if (tileData.stageItem == "BounceBox")
+                    {
+                        newItem = new BounceBox(this)
                         {
                             position = new Point(tileData.position.x * 16, tileData.position.y * 16),
                         };

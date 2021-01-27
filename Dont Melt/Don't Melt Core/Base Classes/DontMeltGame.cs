@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 namespace DontMelt
 {
     public sealed class DontMeltGame
@@ -9,8 +8,8 @@ namespace DontMelt
         public bool paused = false;
         public DontMeltGame()
         {
-            StageData stageData = JsonConvert.DeserializeObject<StageData>(AssetHelper.LoadAsset<TextAsset>("THE BEGINING.json").data);
-            //stageData.data = new List<TileData>() { new TileData("player", Point.Zero), new TileData("ground", new Point(0, -1)), new TileData("lava", new Point(1, 0)) };
+            StageData stageData = new StageData();
+            stageData.tilemapData = new List<TileData>() { new TileData(Point.Zero, "Player"), new TileData(new Point(0, -1), "Ground"), new TileData(new Point(0, 3), "BounceBox") };
             stagePlayer = new StagePlayer(stageData);
         }
         public TickReturnPacket Tick(TickInputPacket packet)

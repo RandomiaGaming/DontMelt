@@ -1,24 +1,37 @@
 ﻿using System;
 using System.Collections.Generic;
-
 namespace DontMelt
 {
-    public sealed class TileData
+    public struct TileData
     {
-        public readonly string itemName = "Ground";
-        public readonly Point position = Point.Zero;
-        public TileData(string itemName, Point position)
+        public Point position;
+        public string stageItem;
+        public string NSID;
+        public TileData(Point position, string stageItem)
         {
-            if(itemName is null)
+            this.position = position;
+            if (stageItem is null)
             {
                 throw new NullReferenceException();
             }
-            this.itemName = itemName;
+            this.stageItem = stageItem;
+            NSID = null;
+        }
+        public TileData(Point position, string stageItem, string NSID)
+        {
             this.position = position;
+            if (stageItem is null)
+            {
+                throw new NullReferenceException();
+            }
+            this.stageItem = stageItem;
+            this.NSID = NSID;
         }
     }
     public sealed class StageData
     {
-        public List<TileData> data = new List<TileData>();
+        public Point playerStartLocation = Point.Zero;
+        public string playerNSID = null;
+        public List<TileData> tilemapData = new List<TileData>();
     }
 }
